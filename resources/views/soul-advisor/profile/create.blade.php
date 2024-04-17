@@ -1,10 +1,10 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
         @if (isset($profile))
-            <form method="post" action="/list-practice/{{ $profile->id }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+            <form method="post" action="{{ route('list-practice.update', $profile->id) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
             @method('PATCH')
         @else
-            <form method="post" action="/list-practice/create" class="mt-6 space-y-6" enctype="multipart/form-data">
+            <form method="post" action="{{ route('list-practice.create') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @endif
             @csrf
             <div class="border border-solid rounded-md p-4 border-gray-800">

@@ -3,7 +3,7 @@
 require __DIR__.'/auth.php';
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProfileCreationController;
+use App\Http\Controllers\SoulAdvisor\ProfileController as SoulAdvisorProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,9 +20,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/list-practice', [ProfileCreationController::class, 'index']);
-Route::get('/list-practice/create', [ProfileCreationController::class, 'create']);
-Route::post('/list-practice/create', [ProfileCreationController::class, 'store']);
-Route::patch('/list-practice/{profile}', [ProfileCreationController::class, 'update']);
-Route::get('/list-practice/show', [ProfileCreationController::class, 'show']);
-
+Route::prefix('list-practice')->group(function() {
+    Route::get('/', [SoulAdvisorProfileController::class, 'index'])->name('list-practice.index');
+    Route::get('/create', [SoulAdvisorProfileController::class, 'create'])->name('list-practice.create');
+    Route::post('/create', [SoulAdvisorProfileController::class, 'store'])->name('list-practice.store');
+    Route::patch('/{profile}', [SoulAdvisorProfileController::class, 'update'])->name('list-practice.update');
+    Route::get('/show', [SoulAdvisorProfileController::class, 'show'])->name('list-practice.show');
+});

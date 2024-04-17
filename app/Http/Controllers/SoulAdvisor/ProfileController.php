@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\SoulAdvisor;
 
-use App\Models\Profile;
-use Illuminate\Http\Request;
+use App\Models\SoulAdvisor\Profile;
+use App\Http\Controllers\Controller;
 
-class ProfileCreationController extends Controller
+class ProfileController extends Controller
 {
     public function index() {
         return view('soul-advisor.index');
@@ -55,7 +55,7 @@ class ProfileCreationController extends Controller
 
         Profile::create($attributes);
 
-        return redirect('/list-practice');
+        return redirect()->route('list-practice.index');
     }
 
     public function update(Profile $profile) {
@@ -91,6 +91,6 @@ class ProfileCreationController extends Controller
 
         $profile->update($attributes);
 
-        return redirect('/list-practice')->with('success', 'Profile Updated');
+        return redirect()->route('list-practice.index')->with('success', 'Profile Updated');
     }
 }
