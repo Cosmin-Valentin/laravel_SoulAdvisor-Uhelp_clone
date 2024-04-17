@@ -3,6 +3,7 @@
 require __DIR__.'/auth.php';
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UHelp\TicketController;
 use App\Http\Controllers\SoulAdvisor\ProfileController as SoulAdvisorProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,5 @@ Route::prefix('list-practice')->group(function() {
     Route::patch('/{profile}', [SoulAdvisorProfileController::class, 'update'])->name('list-practice.update');
     Route::get('/show', [SoulAdvisorProfileController::class, 'show'])->name('list-practice.show');
 });
+
+Route::resource('uhelp', TicketController::class)->only(['index']);

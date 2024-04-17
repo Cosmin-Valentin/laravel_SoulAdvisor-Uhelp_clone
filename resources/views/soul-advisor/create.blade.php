@@ -1,6 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        @include('soul-advisor.components.back-button', ['header' => 'Professional Online Profile Creation'])
+        @include('elements.back-button', [
+            'header' => 'Professional Online Profile Creation',
+            'section' => 'list-practice.index'    
+        ])
     </x-slot>
 
     @include('soul-advisor.profile.create')

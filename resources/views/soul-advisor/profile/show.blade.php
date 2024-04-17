@@ -1,6 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        @include('soul-advisor.components.back-button', ['header' => 'Current Profile'])
+        @include('elements.back-button', [
+            'header' => 'Current Profile',
+            'section' => 'list-practice.index'
+        ])
     </x-slot>
 
     <div class="py-12">

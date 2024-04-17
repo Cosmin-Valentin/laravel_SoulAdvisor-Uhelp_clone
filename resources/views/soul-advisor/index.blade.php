@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Professional Online Profile Creation') }}
-        </h2>
+        @include('elements.back-button', [
+            'header' => 'Professional Online Profile Creation', 
+            'section' =>'dashboard'
+        ])
     </x-slot>
 
     <div class="py-12">
