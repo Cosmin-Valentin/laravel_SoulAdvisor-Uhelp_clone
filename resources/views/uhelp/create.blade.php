@@ -7,8 +7,8 @@
             <div class="agent-main-container">
                 <div class="side-app">
                     <div class="app-header"></div>
-                    @include('uhelp.partials.agent-header')
-                    @include('uhelp.partials.agent-dashboard')
+                    @include('uhelp.partials.agent-header', ['title' => 'Create Ticket'])
+                    @include('uhelp.partials.agent-create')
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
     @endsection
 @else
     @section('header')
-        @include('uhelp.partials.customer-header')
+        @include('uhelp.partials.customer-header', ['title' => 'Create Ticket'])
     @endsection
 
     @section('main')
@@ -28,7 +28,7 @@
                 <div class="row">
                     @include('uhelp.partials.customer-aside')
                     <div class="page-card">
-                        @include('uhelp.partials.customer-dashboard')
+                        @include('uhelp.partials.customer-create')
                     </div>
                 </div>
             </div>
@@ -39,11 +39,3 @@
         @include('uhelp.partials.footer')
     @endsection
 @endif
-@include('uhelp.modals.delete-ticket')
-
-{{-- <x-slot name="header">
-        @include('elements.back-button', [
-            'header' => 'UHelp Support Ticketing System', 
-            'section' =>'dashboard'
-        ])
-</x-slot> --}}

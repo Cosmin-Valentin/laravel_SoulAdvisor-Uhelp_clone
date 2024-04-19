@@ -76,7 +76,7 @@
             <div class="card-header">
                 <h4 class="card-title">Ticket Summary</h4>
                 <div class="create-ticket">
-                    <a href="#" class="btn-ticket">
+                    <a href="{{ route('uhelp.create') }}" class="btn-ticket">
                         <i class="fa fa-paper-plane-o"></i>
                         Create Ticket
                     </a>
@@ -106,7 +106,7 @@
                                     </td>
                                     <td class="ticket-details">
                                         <div>
-                                            <a href="#">Lorem ipsum dolor sit amet.</a>
+                                            <a href="{{ route('uhelp.show') }}">Lorem ipsum dolor sit amet.</a>
                                             <ul>
                                                 <li>#SP-1</li>
                                                 <li>
@@ -130,7 +130,7 @@
                                     </td>
                                     <td>
                                         <div class="actions">
-                                            <a href="#" class="view-ticket">
+                                            <a href="{{ route('uhelp.show') }}" class="view-ticket">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <a href="#" class="delete-ticket">

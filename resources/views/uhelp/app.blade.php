@@ -17,6 +17,6 @@
         @yield('main')
     </section>
 
-    {{-- @yield('footer') --}}
+    @yield('footer')
 </body>
 </html>

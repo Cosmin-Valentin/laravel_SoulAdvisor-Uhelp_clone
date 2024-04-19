@@ -9,22 +9,22 @@
     <div class="aside-container">
         <div class="sidebar-user">
             <div class="user-pic">
-                <img src="https://randomuser.me/api/portraits/men/40.jpg" alt="user avatar">
+                <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="user avatar">
             </div>
             <div class="user-info">
                 <h5>Admin</h5>
-                <span>Timothy L. Brodbeck</span>
+                <span>Alex Delgado</span>
             </div>
         </div>
         <ul class="sidebar-menu">
             <li>
-                <a href="#" class="sidebar-menu-item">
+                <a href="{{ route('uhelp.index') }}" class="sidebar-menu-item {{ request()->routeIs('uhelp.index') ? 'active' : '' }}">
                     <i class="fa fa-navicon"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="sidebar-menu-item">
+                <a href="{{ route('uhelp.create') }}" class="sidebar-menu-item {{ request()->routeIs('uhelp.create') ? 'active' : '' }}">
                     <i class="fa fa-pencil"></i>
                     <span>Create Ticket</span>
                 </a>

@@ -29,4 +29,8 @@ Route::prefix('list-practice')->group(function() {
     Route::get('/show', [SoulAdvisorProfileController::class, 'show'])->name('list-practice.show');
 });
 
-Route::resource('uhelp', TicketController::class)->only(['index']);
+Route::prefix('uhelp')->group(function() {
+    Route::get('/', [TicketController::class, 'index'])->name('uhelp.index');
+    Route::get('/show', [TicketController::class, 'show'])->name('uhelp.show');
+    Route::get('/create', [TicketController::class, 'create'])->name('uhelp.create');
+});
