@@ -3,10 +3,10 @@
         <div class="card-body">
             <div class="profile">
                 <div class="profile-img">
-                    <img src="https://randomuser.me/api/portraits/men/40.jpg" alt="user avatar">
+                    <img src="https://randomuser.me/api/portraits/men/{{ $user->id }}.jpg" alt="user avatar">
                 </div>
-                <h5 class="profile-name">Timothy L. Brodbeck</h5>
-                <small class="profile-email">customer@customer.com</small>
+                <h5 class="profile-name">{{ ucwords($user->name) }}</h5>
+                <small class="profile-email">{{ $user->email }}</small>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
                             </td>
                             <td>:</td>
                             <td>
-                                <span>#SP-1</span>
+                                <span>{{ $ticket->custom_ticket_id }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -33,7 +33,7 @@
                             </td>
                             <td>:</td>
                             <td>
-                                <span>nihil</span>
+                                <span>{{ ucwords($ticket->category->name) }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -41,8 +41,8 @@
                                 <span>Priority</span>
                             </td>
                             <td>:</td>
-                            <td id="priorityId">
-                                <span class="badge badge-danger-light">High</span>
+                            <td>
+                                {!! $ticket->priority_html !!}
                             </td>
                         </tr>
                         <tr>
@@ -51,7 +51,7 @@
                             </td>
                             <td>:</td>
                             <td>
-                                <span>25 Oct, 2015</span>
+                                <span>{{ $ticket->created_at->format('d-M-Y') }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -60,7 +60,7 @@
                             </td>
                             <td>:</td>
                             <td>
-                                <span class="badge badge-orange">New</span>
+                                {!! $ticket->status_html !!}
                             </td>
                         </tr>
                     </tbody>

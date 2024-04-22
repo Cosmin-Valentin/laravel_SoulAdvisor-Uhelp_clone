@@ -8,6 +8,44 @@ const panelCollapse = document.querySelector(".panel .panel-collapse");
 const deleteTicketBtn = document.querySelector(".actions .delete-ticket");
 const deleteTicketSpan = document.querySelector(".delete-ticket-span");
 const deleteTicketModal = document.querySelector(".delete-ticket-overlay");
+const priorityModal = document.querySelector(".priority-overlay");
+const priorityModalCancel = document.querySelector(".priority-overlay .close");
+const editPriority = document.querySelector("#priority button");
+const categoryModal = document.querySelector(".category-overlay");
+const categoryModalCancel = document.querySelector(".category-overlay .close");
+const editCategory = document.querySelector("#category button");
+
+if (categoryModal && categoryModalCancel && editCategory) {
+    editCategory.addEventListener("click", (e) => {
+        categoryModal.classList.toggle("show");
+        e.stopPropagation();
+    });
+    categoryModalCancel.addEventListener("click", () =>
+        categoryModal.classList.remove("show")
+    );
+
+    document.addEventListener("click", (e) => {
+        if (e.target === categoryModal) {
+            categoryModal.classList.remove("show");
+        }
+    });
+}
+
+if (priorityModal && priorityModalCancel && editPriority) {
+    editPriority.addEventListener("click", (e) => {
+        priorityModal.classList.toggle("show");
+        e.stopPropagation();
+    });
+    priorityModalCancel.addEventListener("click", () =>
+        priorityModal.classList.remove("show")
+    );
+
+    document.addEventListener("click", (e) => {
+        if (e.target === priorityModal) {
+            priorityModal.classList.remove("show");
+        }
+    });
+}
 
 if (deleteTicketBtn && deleteTicketModal) {
     deleteTicketBtn.addEventListener("click", (e) => {

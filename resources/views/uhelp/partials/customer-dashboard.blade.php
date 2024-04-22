@@ -6,7 +6,7 @@
                     <div class="ticket-type-body">
                         <div class="ticket-type-info">
                             <span>Total Tickets</span>
-                            <h3 class="text-primary">16</h3>
+                            <h3 class="text-primary">{{ $tickets->count() }}</h3>
                         </div>
                         <div class="ticket-type-alt">
                             <div class="alt-container primary-transparent">
@@ -23,7 +23,7 @@
                     <div class="ticket-type-body">
                         <div class="ticket-type-info">
                             <span>Active Tickets</span>
-                            <h3 class="text-success">13</h3>
+                            <h3 class="text-success">{{ $tickets->filterByStatus('inProgress')->count() }}</h3>
                         </div>
                         <div class="ticket-type-alt">
                             <div class="alt-container success-transparent">
@@ -40,7 +40,7 @@
                     <div class="ticket-type-body">
                         <div class="ticket-type-info">
                             <span>OnHold Tickets</span>
-                            <h3 class="text-secondary">3</h3>
+                            <h3 class="text-secondary">{{ $tickets->filterByStatus('onHold')->count() }}</h3>
                         </div>
                         <div class="ticket-type-alt">
                             <div class="alt-container warning-transparent">
@@ -57,7 +57,7 @@
                     <div class="ticket-type-body">
                         <div class="ticket-type-info">
                             <span>Closed Tickets</span>
-                            <h3 class="text-secondary">2</h3>
+                            <h3 class="text-secondary">{{ $tickets->filterByStatus('closed')->count() }}</h3>
                         </div>
                         <div class="ticket-type-alt">
                             <div class="alt-container danger-transparent">
@@ -99,46 +99,48 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td class="remove-column-data">
-                                        <input type="checkbox" autocomplete="off">
-                                    </td>
-                                    <td class="ticket-details">
-                                        <div>
-                                            <a href="{{ route('uhelp.show') }}">Lorem ipsum dolor sit amet.</a>
-                                            <ul>
-                                                <li>#SP-1</li>
-                                                <li>
-                                                    <i class="fa fa-calendar"></i>
-                                                    18-Apr-2024
-                                                </li>
-                                                <li class="preference high">High</li>
-                                                <li>
-                                                    <i class="fa fa-th-list"></i>
-                                                    necessitatibus
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-clock-o"></i>
-                                                    20 hours ago
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-orange">New</span>
-                                    </td>
-                                    <td>
-                                        <div class="actions">
-                                            <a href="{{ route('uhelp.show') }}" class="view-ticket">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a href="#" class="delete-ticket">
-                                                <i class="fa fa-trash-o"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @foreach ($tickets as $ticket)
+                                    <tr>
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td class="remove-column-data">
+                                            <input type="checkbox" autocomplete="off">
+                                        </td>
+                                        <td class="ticket-details">
+                                            <div>
+                                                <a href="{{ route('uhelp.show', $ticket->id) }}">{{ $ticket->title }}</a>
+                                                <ul>
+                                                    <li>{{ $ticket->custom_ticket_id }}</li>
+                                                    <li>
+                                                        <i class="fa fa-calendar"></i>
+                                                        {{ $ticket->created_at->format('d-M-Y') }}
+                                                    </li>
+                                                    <li class="preference {{ $ticket->priority }}">{{ ucwords($ticket->priority) }}</li>
+                                                    <li>
+                                                        <i class="fa fa-th-list"></i>
+                                                        {{ $ticket->category ? ucwords($ticket->category->name) : 'No category available' }}
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-clock-o"></i>
+                                                        {{ $ticket->created_at ? $ticket->created_at->diffForHumans() : 'No date available' }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {!! $ticket->status_html !!}
+                                        </td>
+                                        <td>
+                                            <div class="actions">
+                                                <a href="{{ route('uhelp.show', $ticket->id) }}" class="view-ticket">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="delete-ticket">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

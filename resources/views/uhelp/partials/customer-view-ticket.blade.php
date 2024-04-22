@@ -1,15 +1,15 @@
 <div class="card customer-view-ticket">
     <div class="card-header">
-        <h4 class="card-title">Harum ut unde distinctio voluptatum.</h4>
+        <h4 class="card-title">{{ $ticket->title }}</h4>
         <small>
             <i class="fa fa-clock-o"></i>
             Created Date
-            <span>10 years ago</span>
+            <span>{{ $ticket->created_at ? $ticket->created_at->format('D, d M Y, h:i A') . ' (' . $ticket->created_at->diffForHumans() . ')' : 'Date not available' }}</span>
         </small>
     </div>
     <div class="card-body">
         <div>
-            <p>Dolor nulla adipisci ut ut. Omnis voluptas facilis aut. Accusamus distinctio dolorem quam accusamus. Tenetur consequatur molestiae aut voluptas reiciendis. Ipsum vel iure unde nam quod. Sit non laborum quia et exercitationem. Aut voluptatem et similique molestiae voluptatem ut. Consectetur neque consequuntur reprehenderit explicabo omnis saepe. Optio deserunt delectus fugit magni ut voluptas. Dolor ab possimus sint beatae quis. Reprehenderit aut cupiditate et. Laudantium aut aut qui quis est. Consequatur non laudantium id aut consequatur ut quo rerum. Sint provident tenetur exercitationem. Est sit dolorum ad non corrupti. Alias facere corporis enim vel laborum in voluptatem. Placeat eveniet dolorem deserunt et. Odio eum debitis repellat. Atque odio illum vel fuga veritatis quaerat voluptas.</p>
+            <p>{{ $ticket->description }}</p>
         </div>
     </div>
 </div>
@@ -20,10 +20,11 @@
         </div>
         <div class="panel-collapse">
             <div class="card">
-                <form>
+                <form method="POST" action="{{ route('uhelp.storeReply') }}">
+                    @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <textarea name="replyCcomment" id="replyComment" autocomplete="off"></textarea>
+                            <textarea name="reply" id="replyComment" autocomplete="off" required></textarea>
                         </div>
                         <div class="form-group">
                             <div class="custom-controls">
@@ -38,6 +39,7 @@
                                 </label>
                             </div>
                         </div>
+                        <input type="hidden" name="ticket_id" value={{$ticket->id}}>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn-ticket" id="replyTicketBtn">Reply Ticket</button>
@@ -48,44 +50,6 @@
     </div>
 </div>
 
-<div class="card customer-conversation">
-    <div class="card-header">
-        <h4 class="card-title">Conversations</h4>
-    </div>
-    <div>
-        <div class="card-body">
-            <div>
-                <img src="https://randomuser.me/api/portraits/men/40.jpg" alt="user avatar">
-                <div>
-                    <div class="media-body">
-                        <h5>Timothy L. Brodbeck</h5>
-                        <small>
-                            <i class="fa fa-clock-o"></i>
-                            1 second ago
-                        </small>
-                        <div>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi sapiente asperiores odit aut praesentium possimus ducimus quam expedita obcaecati at?</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-            <div>
-                <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="user avatar">
-                <div>
-                    <div class="media-body">
-                        <h5>Alex Delgado</h5>
-                        <small>
-                            <i class="fa fa-clock-o"></i>
-                            10 minutes ago
-                        </small>
-                        <div>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi sapiente asperiores odit aut praesentium possimus ducimus quam expedita obcaecati at?</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@if ($ticket->replies->count())
+    @include('uhelp.partials.ticket-reply')
+@endif

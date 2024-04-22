@@ -2,7 +2,8 @@
     <div class="card-header">
         <h4 class="card-title">New Ticket</h4>
     </div>
-    <form id="user_form">
+    <form id="user_form" method="POST" action="{{ route('uhelp.create') }}">
+        @csrf
         <div class="card-body">
             <div class="form-group">
                 <div class="row">
@@ -10,7 +11,7 @@
                         <label>Subject</label>
                     </div>
                     <div>
-                        <input type="text" name="subject" class="ticket-form-control"  id="subject" placeholder="Subject" autocomplete="off">
+                        <input type="text" name="title" class="ticket-form-control"  id="subject" placeholder="Subject" autocomplete="off" required>
                         <small>
                             Maximum <b>10</b> Characters
                         </small>
@@ -23,11 +24,11 @@
                         <label>Category</label>
                     </div>
                     <div>
-                        <select name="category" class="ticket-form-control" id="category">
+                        <select name="category_id" class="ticket-form-control" id="category" required>
                             <option label="Select Category"></option>
-                            <option value="1">first category</option>
-                            <option value="2">second category</option>
-                            <option value="3">third category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ ucwords($category->name) }}</option>                                   
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -38,13 +39,13 @@
                         <label>Description</label>
                     </div>
                     <div>
-                        <textarea name="message" id="message" autocomplete="off"></textarea>
+                        <textarea name="description" id="message" autocomplete="off" required></textarea>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="ticket-form-checkbox">
-                    <input type="checkbox" value="agreed" autocomplete="off">
+                    <input type="checkbox" value="agreed" autocomplete="off" required>
                     <span>I agree with Terms and Services</span>
                 </label>
             </div>

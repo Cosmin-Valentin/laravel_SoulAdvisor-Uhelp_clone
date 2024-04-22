@@ -1,6 +1,6 @@
 @extends('uhelp.app')
 
-@if ($isAdmin)
+@if ($user->isAdmin)
     @section('main')
         @include('uhelp.partials.agent-aside')
 
@@ -19,6 +19,8 @@
         @include('uhelp.partials.footer')
     @endsection
     @include('uhelp.modals.delete-ticket')
+    @include('uhelp.modals.priority')
+    @include('uhelp.modals.category')
 @else
     @section('header')
         @include('uhelp.partials.customer-header', ['title' => 'Ticket View'])

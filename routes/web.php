@@ -31,6 +31,9 @@ Route::prefix('list-practice')->group(function() {
 
 Route::prefix('uhelp')->group(function() {
     Route::get('/', [TicketController::class, 'index'])->name('uhelp.index');
-    Route::get('/show', [TicketController::class, 'show'])->name('uhelp.show');
+    Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('uhelp.show');
+    Route::post('/reply', [TicketController::class, 'storeReply'])->name('uhelp.storeReply');
     Route::get('/create', [TicketController::class, 'create'])->name('uhelp.create');
+    Route::post('/create', [TicketController::class, 'store'])->name('uhelp.store');
+    Route::post('/update-ticket/{ticket}', [TicketController::class, 'updateTicket'])->name('uhelp.updateTicket');
 });

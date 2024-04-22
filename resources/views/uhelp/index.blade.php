@@ -1,6 +1,6 @@
 @extends('uhelp.app')
 
-@if ($isAdmin)
+@if ($user->isAdmin)
     @section('main')
         @include('uhelp.partials.agent-aside')
         <div class="agent-main">

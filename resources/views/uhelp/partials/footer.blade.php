@@ -1,4 +1,4 @@
-<footer class="{{ $isAdmin ? 'agent-footer' : 'customer-footer' }}">
+<footer class="{{ $user->isAdmin ? 'agent-footer' : 'customer-footer' }}">
     <div class="footer-container">
         <p>
             Copyright © 2024.

@@ -4,52 +4,66 @@
             <div class="card">
                 <div class="card-header">
                     <div>
-                        <h4 class="card-title ticket-title">Sint consequuntur quia fugiat qui omnis quos.</h4>
+                        <h4 class="card-title ticket-title">{{ $ticket->title }}</h4>
                         <small>
                             <i class="fa fa-clock-o"></i>
                             Created At 
-                            <span>Mon, 26 Oct 2015, 02:23 AM (8 years ago)</span>
+                            <span>{{ $ticket->created_at ? $ticket->created_at->format('D, d M Y, h:i A') . ' (' . $ticket->created_at->diffForHumans() . ')' : 'Date not available' }}</span>
                         </small>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="read">
-                        <span>Sunt est possimus voluptatem perferendis. Praesentium rerum consequatur quaerat. Illo et beatae facere esse fugiat in et. Sunt quia corrupti similique enim quidem numquam. Nemo et esse sunt et commodi aut voluptas. Aperiam porro ab ipsum. Tenetur qui ex ullam fugit repudiandae mollitia consequatur. Sunt iusto qui aliquam accusamus id aut. Eius delectus provident at doloribus qui animi in consequatur. Ipsum omnis ipsa sed dolorem vel. Laborum quasi eveniet ut possimus. Voluptatibus sit reprehenderit et quasi aut hic repellat nulla. Et ea quia ut laborum eos et veritatis. Occaecati sunt recusandae eius voluptatem quis. Accusamus architecto numquam blanditiis expedita qui non. Est quod consectetur ut asperiores nihil ut numquam aut. Dignissimos quasi animi laboriosam delectus. Esse quisquam accusantium aut ipsa ipsa est. Saepe recusandae voluptatem sit in. Perferendis voluptatum voluptatum nostrum qui odit aut et impedit. Voluptatem natus porro assumenda natus ipsa quisquam possimus. Ipsa maiores ut voluptatem tempora. Qui sed consectetur repudiandae. Et doloribus qui quo inventore quidem quos. Quisquam qui aut iure dolore ad. Et est ut mollitia voluptas. Alias ex harum eveniet sit assumenda quia aut. Tempora et quia tenetur minima. Nesciunt at numquam voluptatum rem cumque et quis.</span>
+                        <span>{{ $ticket->description }}</span>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Reply Ticket</h4>
+            <div class="card agent-reply-ticket">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title {{ $ticket->replies->count() > 0 ? '' : 'collapsed' }}">Reply Ticket</h4>
+                    </div>
+                    <div class="panel-collapse {{ $ticket->replies->count() > 0 ? '' : 'show' }}">
+
+                        <div class="card">
+                            <form method="POST" action="{{ route('uhelp.storeReply') }}">
+                                @csrf
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <textarea name="reply" id="comment" autocomplete="off" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-controls">
+                                            <label>Status</label>
+                                            <label class="custom-control">
+                                                <input type="radio" name="status" value="inprogress" checked autocomplete="off">
+                                                <span>In-Progress</span>
+                                            </label>
+                                            <label class="custom-control">
+                                                <input type="radio" name="status" value="solved" autocomplete="off">
+                                                <span>Solved</span>
+                                            </label>
+                                            <label class="custom-control">
+                                                <input type="radio" name="status" value="onhold" autocomplete="off">
+                                                <span>On-Hold</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn-ticket" id="replyTicketBtn">Reply Ticket</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
-                <form>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <textarea name="comment" id="comment" autocomplete="off"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-controls">
-                                <label>Status</label>
-                                <label class="custom-control">
-                                    <input type="radio" name="status" value="inprogress" checked autocomplete="off">
-                                    <span>In-Progress</span>
-                                </label>
-                                <label class="custom-control">
-                                    <input type="radio" name="status" value="solved" autocomplete="off">
-                                    <span>Solved</span>
-                                </label>
-                                <label class="custom-control">
-                                    <input type="radio" name="status" value="onhold" autocomplete="off">
-                                    <span>On-Hold</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn-ticket" id="replyTicketBtn">Reply Ticket</button>
-                    </div>
-                </form>
             </div>
+
+            @if ($ticket->replies->count())
+                @include('uhelp.partials.ticket-reply')
+            @endif
         </div>
         <div>
             <div class="card ticket-information">
@@ -66,7 +80,7 @@
                                     </td>
                                     <td>:</td>
                                     <td>
-                                        <span>#SP-1</span>
+                                        <span>{{ $ticket->custom_ticket_id }}</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -74,11 +88,11 @@
                                         <span>Category</span>
                                     </td>
                                     <td>:</td>
-                                    <td>
-                                        <span>nihil</span>
-                                        <a href="#">
+                                    <td id="category">
+                                        <span>{{ ucwords($ticket->category->name) }}</span>
+                                        <button>
                                             <i class="fa fa-edit"></i>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -86,11 +100,11 @@
                                         <span>Priority</span>
                                     </td>
                                     <td>:</td>
-                                    <td id="priorityId">
-                                        <span class="badge badge-danger-light">High</span>
-                                        <a href="#">
+                                    <td id="priority">
+                                        {!! $ticket->priority_html !!}
+                                        <button>
                                             <i class="fa fa-edit"></i>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -99,7 +113,7 @@
                                     </td>
                                     <td>:</td>
                                     <td>
-                                        <span>25 Oct, 2015</span>
+                                        <span>{{ $ticket->created_at->format('d M, Y') }}</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -108,7 +122,7 @@
                                     </td>
                                     <td>:</td>
                                     <td>
-                                        <span class="badge badge-orange">New</span>
+                                        {!! $ticket->status_html !!}
                                     </td>
                                 </tr>
                             </tbody>
@@ -136,12 +150,12 @@
                 <div class="card-body">
                     <div class="profile-pic">
                         <div class="profile-pic-img">
-                            <img src="https://randomuser.me/api/portraits/men/40.jpg" alt="user avatar">
+                            <img src="https://randomuser.me/api/portraits/men/{{ $ticket->author->id }}.jpg" alt="user avatar">
                         </div>
                         <div>
-                            <h5>Timothy L. Brodbeck</h5>
-                            <h6>Timothy L. Brodbeck</h6>
-                            <small>customer@customer.com</small>
+                            <h5>{{ $ticket->author->name }}</h5>
+                            <h6>{{ $ticket->author->name }}</h6>
+                            <small>{{ $ticket->author->email }}</small>
                         </div>
                     </div>
                     <div class="profile-table">

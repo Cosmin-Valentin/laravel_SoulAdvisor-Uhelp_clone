@@ -9,11 +9,11 @@
     <div class="aside-container">
         <div class="sidebar-user">
             <div class="user-pic">
-                <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="user avatar">
+                <img src="https://randomuser.me/api/portraits/men/{{ $user->id }}.jpg" alt="user avatar">
             </div>
             <div class="user-info">
                 <h5>Admin</h5>
-                <span>Alex Delgado</span>
+                <span>{{ ucwords($user->name) }}</span>
             </div>
         </div>
         <ul class="sidebar-menu">

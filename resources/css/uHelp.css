@@ -408,6 +408,7 @@ body {
     border-bottom: 1px solid #dee2e6;
     border-right: 1px solid #dee2e6;
     padding: 10px 18px;
+    text-align: center;
 }
 
 .dashboard-table table tbody tr td:last-child,
@@ -563,9 +564,21 @@ body {
     background-color: #f11541;
 }
 
+.badge-success-light {
+    color: #0dcd94;
+    background-color: rgba(1, 195, 83, 0.15);
+}
+.badge-warning-light {
+    color: #ffad00;
+    background-color: rgba(255, 173, 0, 0.15);
+}
 .badge-danger-light {
     color: #f11541;
     background-color: rgba(241, 21, 65, 0.15);
+}
+.badge-danger-dark {
+    color: #fff;
+    background-color: #af0000;
 }
 
 .ticket-table .actions,
@@ -596,6 +609,10 @@ body {
 .ticket-table .delete-ticket,
 .dashboard-table table .delete-ticket {
     color: #f7284a;
+}
+
+.ticket-table .actions a i {
+    margin: 6px 0px 0px 1px;
 }
 
 .dashboard-table .actions a i {
@@ -1035,9 +1052,8 @@ form .card-footer {
     font-weight: 600;
 }
 
-.agent-side-table a {
+.agent-side-table button {
     color: #fff;
-    text-decoration: none;
     background-color: var(--primary-color);
     margin-left: 0.5rem;
     border-radius: 7px;
@@ -1328,27 +1344,38 @@ footer.agent-footer {
     text-align: left;
 }
 
-.customer-reply-ticket .panel {
+.customer-reply-ticket .panel,
+.agent-reply-ticket .panel {
     border-radius: 7px;
     overflow: hidden;
 }
 
-.customer-reply-ticket .panel-heading {
+.customer-reply-ticket .panel-heading,
+.agent-reply-ticket .panel-heading {
     color: #fff;
     padding: 0;
 }
 
-.customer-reply-ticket .panel-title {
+.customer-reply-ticket .panel-title,
+.agent-reply-ticket .panel-title {
     font-size: 16px;
     display: block;
     padding: 15px 20px;
     position: relative;
-    background: var(--primary-color);
     font-weight: 500;
     cursor: pointer;
 }
 
-.customer-reply-ticket .panel-title::before {
+.customer-reply-ticket .panel-title {
+    background: var(--primary-color);
+}
+
+.agent-reply-ticket .panel-title {
+    background: #184780;
+}
+
+.customer-reply-ticket .panel-title::before,
+.agent-reply-ticket .panel-title::before {
     content: "-";
     position: absolute;
     right: 20px;
@@ -1356,11 +1383,13 @@ footer.agent-footer {
     font-size: 30px;
 }
 
-.customer-reply-ticket .panel-title.collapsed::before {
+.customer-reply-ticket .panel-title.collapsed::before,
+.agent-reply-ticket .panel-title.collapsed::before {
     content: "+";
 }
 
-.customer-reply-ticket .panel-collapse {
+.customer-reply-ticket .panel-collapse,
+.agent-reply-ticket .panel-collapse {
     opacity: 0;
     visibility: hidden;
     max-height: 0;
@@ -1369,14 +1398,16 @@ footer.agent-footer {
         max-height 0.3s ease-in;
 }
 
-.customer-reply-ticket .panel-collapse.show {
+.customer-reply-ticket .panel-collapse.show,
+.agent-reply-ticket .panel-collapse.show {
     opacity: 1;
     visibility: visible;
     max-height: 500px;
     transition: opacity 0.3s ease-in, max-height 0.3s ease-in;
 }
 
-.customer-reply-ticket .panel-collapse .card {
+.customer-reply-ticket .panel-collapse .card,
+.agent-reply-ticket .panel-collapse .card {
     margin-bottom: 0;
 }
 
@@ -1570,4 +1601,91 @@ footer.agent-footer {
 
 .delete-ticket-btn.confirm:hover {
     background: #404ef7;
+}
+
+.ticket-edit-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.3s;
+}
+
+.ticket-edit-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.priority-modal,
+.category-modal {
+    box-sizing: border-box;
+    width: 480px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+}
+
+.ticket-edit-modal .modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e6ebf1;
+}
+
+.ticket-edit-modal .modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+.ticket-edit-modal .close {
+    cursor: pointer;
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+    background-color: transparent;
+    border: 0;
+    text-shadow: none;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #495057;
+    opacity: 0.5;
+}
+
+.ticket-edit-modal .close:hover {
+    color: #000;
+    opacity: 0.75;
+}
+
+.ticket-edit-modal .modal-body {
+    position: relative;
+    padding: 1rem;
+    border-bottom: 1px solid #e6ebf1;
+}
+
+.ticket-edit-modal select {
+    width: 100%;
+}
+
+.ticket-edit-modal .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem;
 }
