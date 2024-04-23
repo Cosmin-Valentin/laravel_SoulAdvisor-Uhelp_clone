@@ -18,48 +18,51 @@
                     </div>
                 </div>
             </div>
-            <div class="card agent-reply-ticket">
-                <div class="panel">
-                    <div class="panel-heading">
-                        <h4 class="panel-title {{ $ticket->replies->count() > 0 ? '' : 'collapsed' }}">Reply Ticket</h4>
-                    </div>
-                    <div class="panel-collapse {{ $ticket->replies->count() > 0 ? '' : 'show' }}">
 
-                        <div class="card">
-                            <form method="POST" action="{{ route('uhelp.storeReply') }}">
-                                @csrf
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <textarea name="reply" id="comment" autocomplete="off" required></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="custom-controls">
-                                            <label>Status</label>
-                                            <label class="custom-control">
-                                                <input type="radio" name="status" value="inprogress" checked autocomplete="off">
-                                                <span>In-Progress</span>
-                                            </label>
-                                            <label class="custom-control">
-                                                <input type="radio" name="status" value="solved" autocomplete="off">
-                                                <span>Solved</span>
-                                            </label>
-                                            <label class="custom-control">
-                                                <input type="radio" name="status" value="onhold" autocomplete="off">
-                                                <span>On-Hold</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
-                                </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btn-ticket" id="replyTicketBtn">Reply Ticket</button>
-                                </div>
-                            </form>
+            @if ($ticket->status !== 'closed')
+                <div class="card agent-reply-ticket">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h4 class="panel-title {{ $ticket->replies->count() > 0 ? '' : 'collapsed' }}">Reply Ticket</h4>
                         </div>
+                        <div class="panel-collapse {{ $ticket->replies->count() > 0 ? '' : 'show' }}">
 
+                            <div class="card">
+                                <form method="POST" action="{{ route('uhelp.storeReply') }}">
+                                    @csrf
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <textarea name="reply" id="comment" autocomplete="off" required></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-controls">
+                                                <label>Status</label>
+                                                <label class="custom-control">
+                                                    <input type="radio" name="status" value="inProgress" checked autocomplete="off">
+                                                    <span>In-Progress</span>
+                                                </label>
+                                                <label class="custom-control">
+                                                    <input type="radio" name="status" value="closed" autocomplete="off">
+                                                    <span>Solved</span>
+                                                </label>
+                                                <label class="custom-control">
+                                                    <input type="radio" name="status" value="onHold" autocomplete="off">
+                                                    <span>On-Hold</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn-ticket" id="replyTicketBtn">Reply Ticket</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
 
             @if ($ticket->replies->count())
                 @include('uhelp.partials.ticket-reply')
@@ -130,19 +133,14 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="btn-group">
-                        <button class="btn-small">Assign</button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">Self Assign</a>
-                            </li>
-                            <li>
-                                <a href="#">Other Assign</a>
-                            </li>
-                        </ul>
-                    </div>
+                    @include('uhelp.elements.btn-group')
                 </div>
             </div>
+
+           @if($ticket->assignee_id && $ticket->assigner_id)
+                @include('uhelp.elements.assign-activity')
+           @endif
+
             <div class="card customer-details">
                 <div class="card-header">
                     <div class="card-title">Customer Details</div>

@@ -13,42 +13,45 @@
         </div>
     </div>
 </div>
-<div class="card customer-reply-ticket">
-    <div class="panel">
-        <div class="panel-heading">
-            <h4 class="panel-title collapsed">Reply Ticket</h4>
-        </div>
-        <div class="panel-collapse">
-            <div class="card">
-                <form method="POST" action="{{ route('uhelp.storeReply') }}">
-                    @csrf
-                    <div class="card-body">
-                        <div class="form-group">
-                            <textarea name="reply" id="replyComment" autocomplete="off" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-controls">
-                                <label>Status</label>
-                                <label class="custom-control">
-                                    <input type="radio" name="status" value="new" checked autocomplete="off">
-                                    <span>New</span>
-                                </label>
-                                <label class="custom-control">
-                                    <input type="radio" name="status" value="solved" autocomplete="off">
-                                    <span>Solved</span>
-                                </label>
+
+@if ($ticket->status !== 'closed' && $ticket->status !== 'onHold')
+    <div class="card customer-reply-ticket">
+        <div class="panel">
+            <div class="panel-heading">
+                <h4 class="panel-title collapsed">Reply Ticket</h4>
+            </div>
+            <div class="panel-collapse">
+                <div class="card">
+                    <form method="POST" action="{{ route('uhelp.storeReply') }}">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group">
+                                <textarea name="reply" id="replyComment" autocomplete="off" required></textarea>
                             </div>
+                            <div class="form-group">
+                                <div class="custom-controls">
+                                    <label>Status</label>
+                                    <label class="custom-control">
+                                        <input type="radio" name="status" value="inProgress" checked autocomplete="off">
+                                        <span>New</span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input type="radio" name="status" value="closed" autocomplete="off">
+                                        <span>Solved</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <input type="hidden" name="ticket_id" value={{$ticket->id}}>
                         </div>
-                        <input type="hidden" name="ticket_id" value={{$ticket->id}}>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn-ticket" id="replyTicketBtn">Reply Ticket</button>
-                    </div>
-                </form>
+                        <div class="card-footer">
+                            <button type="submit" class="btn-ticket" id="replyTicketBtn">Reply Ticket</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+@endif
 
 @if ($ticket->replies->count())
     @include('uhelp.partials.ticket-reply')

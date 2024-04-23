@@ -43,12 +43,12 @@ class Ticket extends Model
                 if($this->created_at > Carbon::now()->subDays(2)) {
                     return '<span class="badge badge-orange">New</span>';
                 } else {
-                    return '<span class="badge badge-info">In Progress</span>';
+                    return '<span class="badge badge-info">In-Progress</span>';
                 }
             case 'onHold' :
-                return '<span class="badge badge-warning">On Hold</span>';
+                return '<span class="badge badge-warning">On-Hold</span>';
             case 'reOpened' :
-                return '<span class="badge badge-teal">Re Opened</span>';
+                return '<span class="badge badge-teal">Re-Opened</span>';
             case 'closed' :
                 return '<span class="badge badge-danger">Closed</span>';
             default :

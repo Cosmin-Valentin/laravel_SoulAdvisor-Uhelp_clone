@@ -105,7 +105,7 @@
                                         <td class="remove-column-data">
                                             <input type="checkbox" autocomplete="off">
                                         </td>
-                                        <td class="ticket-details">
+                                        <td class="ticket-details" data-ticket-id="{{ $ticket->id }}">
                                             <div>
                                                 <a href="{{ route('uhelp.show', $ticket->id) }}">{{ $ticket->title }}</a>
                                                 <ul>
@@ -134,9 +134,9 @@
                                                 <a href="{{ route('uhelp.show', $ticket->id) }}" class="view-ticket">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="delete-ticket">
+                                                <button class="delete-ticket">
                                                     <i class="fa fa-trash-o"></i>
-                                                </a>
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>

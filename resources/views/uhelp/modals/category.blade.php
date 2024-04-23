@@ -8,7 +8,6 @@
         </div>
         <form method="post" action="{{ route('uhelp.updateTicket', $ticket->id) }}">
             @csrf
-            <input type="hidden" name="id" value="{{ $ticket->id }}">
             <div class="modal-body">
                 <select name="category_id" required>
                     <option label="Select Category"></option>

@@ -30,10 +30,16 @@
                         <i class="fa fa-trash"></i>
                         Delete Ticket
                     </span>
-                    <span>
-                        <i class="fa fa-times-circle"></i>
-                        Force Close
-                    </span>
+                    @if ($ticket->status !== 'closed')
+                        <form id="close" method="post" action="{{ route('uhelp.updateTicket', $ticket->id) }}">
+                            @csrf
+                            <input type="hidden" name="status" value="closed">
+                            <button type="submit">
+                                <i class="fa fa-times-circle"></i>
+                                Force Close
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
         @endif

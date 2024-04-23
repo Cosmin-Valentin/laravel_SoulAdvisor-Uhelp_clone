@@ -17,6 +17,8 @@
     @section('footer')
         @include('uhelp.partials.footer')
     @endsection
+    
+    @include('uhelp.modals.assign')
 @else
     @section('header')
         @include('uhelp.partials.customer-header')

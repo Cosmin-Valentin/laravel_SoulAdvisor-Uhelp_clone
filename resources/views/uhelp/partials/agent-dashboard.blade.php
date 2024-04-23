@@ -106,7 +106,7 @@
                                                     <td class="remove-column-data">
                                                         <input type="checkbox" autocomplete="off">
                                                     </td>
-                                                    <td class="ticket-details">
+                                                    <td class="ticket-details" data-ticket-id="{{ $ticket->id }}">
                                                         <div>
                                                             <a href="{{ route('uhelp.show', $ticket->id) }}">{{ $ticket->title }}</a>
                                                             <ul>
@@ -115,7 +115,7 @@
                                                                     <i class="fa fa-calendar"></i>
                                                                     {{ $ticket->created_at->format('d-M-Y') }}
                                                                 </li>
-                                                                <li class="preference {{ $ticket->priority }}">{!! $ticket->priority_html !!}</li>
+                                                                <li class="preference {{ $ticket->priority }}">{{ ucwords($ticket->priority) }}</li>
                                                                 <li>
                                                                     <i class="fa fa-th-list"></i>
                                                                     {{ $ticket->category ? ucwords($ticket->category->name) : 'No category available' }}
@@ -132,26 +132,16 @@
                                                         {!! $ticket->status_html !!}
                                                     </td>
                                                     <td>
-                                                        <div class="btn-group">
-                                                            <button class="btn-small">Assign</button>
-                                                            <ul class="dropdown-menu">
-                                                                <li>
-                                                                    <a href="#">Self Assign</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Other Assign</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                        @include('uhelp.elements.btn-group')
                                                     </td>
                                                     <td>
                                                         <div class="actions">
                                                             <a href="{{ route('uhelp.show', $ticket->id) }}" class="view-ticket">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
-                                                            <a href="#" class="delete-ticket">
+                                                            <button class="delete-ticket">
                                                                 <i class="fa fa-trash-o"></i>
-                                                            </a>
+                                                            </button>
                                                         </div>
                                                     </td>
                                                 </tr>
