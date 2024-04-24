@@ -30,7 +30,7 @@ Route::prefix('list-practice')->group(function() {
 });
 
 Route::prefix('uhelp')->group(function() {
-    Route::get('/', [TicketController::class, 'index'])->name('uhelp.index');
+    Route::get('/{status?}', [TicketController::class, 'index'])->name('uhelp.index');
     Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('uhelp.show');
     Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('uhelp.destroy');
     Route::post('/reply', [TicketController::class, 'storeReply'])->name('uhelp.storeReply');

@@ -10,6 +10,11 @@
             </div>
         </div>
     </div>
+    
+    @if($ticket->assignee_id && $ticket->assigner_id)
+        @include('uhelp.elements.assign-activity')
+    @endif
+
     <div class="card ticket-information">
         <div class="card-header">
             <div class="card-title">Ticket Information</div>

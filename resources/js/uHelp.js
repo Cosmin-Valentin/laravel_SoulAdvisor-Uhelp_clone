@@ -18,6 +18,13 @@ const categoryModalCancel = document.querySelector(".category-overlay .close");
 const editCategory = document.querySelector("#category button");
 const assignModal = document.querySelector(".assign-overlay");
 const assignModalCancel = document.querySelector(".assign-overlay .close");
+const globalTicketsSide = document.querySelector(".slide-menu").parentNode;
+
+if (globalTicketsSide) {
+    globalTicketsSide.addEventListener("click", () => {
+        globalTicketsSide.classList.toggle("is-expanded");
+    });
+}
 
 if (deleteTicketBtn.length > 0) {
     deleteTicketBtn.forEach((btn) => {

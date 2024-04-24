@@ -907,6 +907,7 @@ form .card-footer {
     font-weight: 400;
     margin: 5px 0;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .sidebar-menu-item.active,
@@ -925,6 +926,57 @@ form .card-footer {
 .sidebar-menu-item span {
     white-space: nowrap;
     font-weight: 400;
+}
+
+.sidebar-menu-item .fa-angle-right {
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+}
+
+.is-expanded .fa-angle-right {
+    transform: rotate(90deg);
+    right: 10px;
+    bottom: 5px;
+}
+
+.slide-menu {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.is-expanded .slide-menu {
+    display: block;
+}
+
+.slide-menu .slide-item {
+    color: #aab3cc;
+    background: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 8px 14px 8px 35px;
+    transition: all 0.3s;
+}
+
+.slide-menu .slide-item::before {
+    content: "";
+    margin-right: 10px;
+    font-size: 11px;
+    position: relative;
+    opacity: 0.6;
+    width: 5px;
+    height: 5px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+
+.slide-menu .slide-item.active,
+.slide-menu .slide-item:hover {
+    color: var(--primary-color);
 }
 
 .agent-main {

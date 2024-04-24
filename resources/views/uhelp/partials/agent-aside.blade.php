@@ -18,7 +18,7 @@
         </div>
         <ul class="sidebar-menu">
             <li>
-                <a href="{{ route('uhelp.index') }}" class="sidebar-menu-item {{ request()->routeIs('uhelp.index') ? 'active' : '' }}">
+                <a href="{{ route('uhelp.index') }}" class="sidebar-menu-item {{ (request()->routeIs('uhelp.index') && !isset($status)) ? 'active' : '' }}">
                     <i class="fa fa-navicon"></i>
                     <span>Dashboard</span>
                 </a>
@@ -28,6 +28,27 @@
                     <i class="fa fa-pencil"></i>
                     <span>Create Ticket</span>
                 </a>
+            </li>
+            <li class="{{ isset($status) ? 'is-expanded' : '' }}">
+                <span class="sidebar-menu-item {{ (request()->routeIs('uhelp.index') && isset($status)) ? 'active' : '' }}">
+                    <i class="fa fa-ticket"></i>
+                    <span>Global Tickets</span>
+                    <i class="fa fa-angle-right"></i>
+                </span>
+                <ul class="slide-menu">
+                    <li>
+                        <a class="slide-item {{ !isset($status) ? 'active' : '' }}" href="{{ route('uhelp.index') }}">Total Tickets</a>
+                    </li>
+                    <li>
+                        <a class="slide-item {{ $status == 'recent' ? 'active' : '' }}" href="{{ route('uhelp.index', 'recent') }}">Recent Tickets</a>
+                    </li>
+                    <li>
+                        <a class="slide-item {{ $status == 'active' ? 'active' : '' }}" href="{{ route('uhelp.index', 'active') }}">Active Tickets</a>
+                    </li>
+                    <li>
+                        <a class="slide-item {{ $status == 'closed' ? 'active' : '' }}" href="{{ route('uhelp.index', 'closed') }}">Closed Tickets</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

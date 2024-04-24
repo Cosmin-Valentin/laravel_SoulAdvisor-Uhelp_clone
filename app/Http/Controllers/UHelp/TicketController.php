@@ -8,20 +8,32 @@ use App\Models\UHelp\Ticket;
 use App\Models\UHelp\TicketReply;
 use App\Models\UHelp\TicketCategory;
 use App\Models\User;
+use Carbon\Carbon;
 
 class TicketController extends Controller
 {
-    public function index() {
+    public function index($status = null) {
         $user = auth()->user();
-        if($user->isAdmin) {
-            $tickets = Ticket::all();
-        } else {
-            $tickets = Ticket::where('created_by', $user->id)->get();
+        $query = Ticket::query();
+
+        if($status == 'closed') {
+            $query->where('status','closed');
+        } else if ($status == 'recent') {
+            $query->where('created_at', '>=', Carbon::now()->subDays(2));
+        } else if ($status == 'active') {
+            $query->where('status', '!=', 'closed');
+        } 
+
+        if(!$user->isAdmin) {
+            $query->where('created_by', $user->id);
         }
+
+        $tickets = $query->orderBy('created_at', 'desc')->get();
 
         return view('uhelp.index', [
             'user' => $user,
             'tickets' => $tickets,
+            'status' => $status ?? null,
             'users' => User::where('id', '!=', auth()->id())->get()
         ]);
     }
@@ -86,18 +98,19 @@ class TicketController extends Controller
             'unassign' => 'sometimes|required',
             'status' => 'sometimes|required|string'
         ]);
+
         if(isset($attributes['unassign'])) {
             $attributes['assigner_id'] = null;
             $attributes['assignee_id'] = null;
             unset($attributes['unassign']);
         }
+
         if(isset($attributes['assignee_id'])) {
             $attributes['assigner_id'] = auth()->id();
         } 
 
         $ticket->update($attributes);
         return back();
-
     }
 
     public function destroy(Ticket $ticket) {

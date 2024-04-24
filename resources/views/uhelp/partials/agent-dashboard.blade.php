@@ -1,82 +1,88 @@
 <div class="agent-dashboard">
-    <h6>Global Tickets</h6>
-    <div class="row">
-        <div class="global-ticket">
-            <div class="card">
-                <div class="card-body">
-                    <a href="#">
-                        <div>
-                            <div class="primary-transparent global-ticket-icon">
-                                <i class="fa fa-ticket"></i>
-                            </div>
+    @if (!isset($status))
+        <h6>Global Tickets</h6>
+        <div class="row">
+            <div class="global-ticket">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ route('uhelp.index') }}">
                             <div>
-                                <p>All Tickets</p>
-                                <h5>{{ $tickets->count() }}</h5>
+                                <div class="primary-transparent global-ticket-icon">
+                                    <i class="fa fa-ticket"></i>
+                                </div>
+                                <div>
+                                    <p>All Tickets</p>
+                                    <h5>{{ $tickets->count() }}</h5>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="global-ticket">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ route('uhelp.index', 'recent') }}">
+                            <div>
+                                <div class="secondary-transparent global-ticket-icon">
+                                    <i class="fa fa-ticket"></i>
+                                </div>
+                                <div>
+                                    <p>Recent Tickets</p>
+                                    <h5>{{ $tickets->count() }}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="global-ticket">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ route('uhelp.index', 'active') }}">
+                            <div>
+                                <div class="success-transparent global-ticket-icon">
+                                    <i class="fa fa-ticket"></i>
+                                </div>
+                                <div>
+                                    <p>Active Tickets</p>
+                                    <h5>{{ $tickets->filterByStatus('inProgress')->count() }}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="global-ticket">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ route('uhelp.index', 'closed') }}">
+                            <div>
+                                <div class="danger-transparent global-ticket-icon">
+                                    <i class="fa fa-ticket"></i>
+                                </div>
+                                <div>
+                                    <p>Closed Tickets</p>
+                                    <h5>{{ $tickets->filterByStatus('closed')->count() }}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="global-ticket">
-            <div class="card">
-                <div class="card-body">
-                    <a href="#">
-                        <div>
-                            <div class="secondary-transparent global-ticket-icon">
-                                <i class="fa fa-ticket"></i>
-                            </div>
-                            <div>
-                                <p>Recent Tickets</p>
-                                <h5>{{ $tickets->count() }}</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="global-ticket">
-            <div class="card">
-                <div class="card-body">
-                    <a href="#">
-                        <div>
-                            <div class="success-transparent global-ticket-icon">
-                                <i class="fa fa-ticket"></i>
-                            </div>
-                            <div>
-                                <p>Active Tickets</p>
-                                <h5>{{ $tickets->filterByStatus('inProgress')->count() }}</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="global-ticket">
-            <div class="card">
-                <div class="card-body">
-                    <a href="#">
-                        <div>
-                            <div class="danger-transparent global-ticket-icon">
-                                <i class="fa fa-ticket"></i>
-                            </div>
-                            <div>
-                                <p>Closed Tickets</p>
-                                <h5>{{ $tickets->filterByStatus('closed')->count() }}</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endif
 
     <div class="row">
         <div>
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
-                        Recent Tickets
+                        @if (!isset($status))
+                            Recent Tickets
+                        @else
+                            {{ ucwords($status) . ' Tickets' }}
+                        @endif
                     </h4>
                 </div>
                 <div class="card-body">
