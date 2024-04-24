@@ -586,6 +586,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .dashboard-table table .actions,
@@ -625,10 +626,79 @@ form#reOpen .btn-ticket {
 
 .ticket-table .actions a i {
     margin: 6px 0px 0px 1px;
+    cursor: pointer;
 }
 
 .dashboard-table .actions a i {
     margin-top: 6px;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 37px;
+    border: 1px solid #222;
+    background-color: #222;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.agent-side-table .tooltip {
+    bottom: 45px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.tooltip::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translate3d(45px, 29px, 0px);
+    border-width: 0.4rem 0.4rem 0;
+    border-color: #222 transparent transparent transparent;
+}
+
+.agent-side-table .tooltip::before {
+    transform: translate3d(45px, 25px, 0px);
+}
+
+.tooltip.show-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.actions .tooltip.show {
+    right: 34px;
+}
+
+.actions .tooltip.delete {
+    left: 15px;
+}
+
+.ticket-container .actions .tooltip.show {
+    right: 44px;
+}
+
+.ticket-container .actions .tooltip.delete {
+    left: 27px;
+}
+
+.agent-side-table .tooltip.category {
+    right: 33px;
+    width: 105px;
+    bottom: 43px;
+}
+
+.agent-side-table .tooltip.priority {
+    right: 12px;
 }
 
 footer.customer-footer {
@@ -1072,6 +1142,11 @@ form .card-footer {
     margin-left: 0.5rem;
     border-radius: 7px;
     padding: 0.25rem;
+}
+
+.agent-side-table #priority,
+.agent-side-table #category {
+    position: relative;
 }
 
 .btn-group {

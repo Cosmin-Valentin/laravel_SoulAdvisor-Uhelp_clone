@@ -21,6 +21,9 @@ const assignModalCancel = document.querySelector(".assign-overlay .close");
 
 if (deleteTicketBtn.length > 0) {
     deleteTicketBtn.forEach((btn) => {
+        const tooltipDelete = btn.parentNode.querySelector(".tooltip.delete");
+        const tooltipShow = btn.parentNode.querySelector(".tooltip.show");
+        const viewTicket = btn.parentNode.querySelector(".view-ticket");
         btn.addEventListener("click", (e) => {
             deleteTicketModal.classList.toggle("show");
             e.stopPropagation();
@@ -28,6 +31,26 @@ if (deleteTicketBtn.length > 0) {
                 document.querySelector(".delete-modal form"),
                 btn
             );
+        });
+
+        btn.addEventListener("mouseover", (e) => {
+            e.stopPropagation();
+            tooltipDelete.classList.add("show-tooltip");
+        });
+
+        btn.addEventListener("mouseout", (e) => {
+            e.stopPropagation();
+            tooltipDelete.classList.remove("show-tooltip");
+        });
+
+        viewTicket.addEventListener("mouseover", (e) => {
+            e.stopPropagation();
+            tooltipShow.classList.add("show-tooltip");
+        });
+
+        viewTicket.addEventListener("mouseout", (e) => {
+            e.stopPropagation();
+            tooltipShow.classList.remove("show-tooltip");
         });
     });
 
@@ -82,6 +105,8 @@ if (btnAssign.length > 0) {
 }
 
 if (categoryModal && categoryModalCancel && editCategory) {
+    const tooltipCategory =
+        editCategory.parentNode.querySelector(".tooltip.category");
     editCategory.addEventListener("click", (e) => {
         categoryModal.classList.toggle("show");
         e.stopPropagation();
@@ -95,9 +120,21 @@ if (categoryModal && categoryModalCancel && editCategory) {
             categoryModal.classList.remove("show");
         }
     });
+
+    editCategory.addEventListener("mouseover", (e) => {
+        e.stopPropagation();
+        tooltipCategory.classList.add("show-tooltip");
+    });
+
+    editCategory.addEventListener("mouseout", (e) => {
+        e.stopPropagation();
+        tooltipCategory.classList.remove("show-tooltip");
+    });
 }
 
 if (priorityModal && priorityModalCancel && editPriority) {
+    const tooltipPriority =
+        editPriority.parentNode.querySelector(".tooltip.priority");
     editPriority.addEventListener("click", (e) => {
         priorityModal.classList.toggle("show");
         e.stopPropagation();
@@ -110,6 +147,16 @@ if (priorityModal && priorityModalCancel && editPriority) {
         if (e.target === priorityModal) {
             priorityModal.classList.remove("show");
         }
+    });
+
+    editPriority.addEventListener("mouseover", (e) => {
+        e.stopPropagation();
+        tooltipPriority.classList.add("show-tooltip");
+    });
+
+    editPriority.addEventListener("mouseout", (e) => {
+        e.stopPropagation();
+        tooltipPriority.classList.remove("show-tooltip");
     });
 }
 

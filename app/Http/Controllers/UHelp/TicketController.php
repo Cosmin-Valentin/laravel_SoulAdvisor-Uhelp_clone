@@ -67,7 +67,7 @@ class TicketController extends Controller
         ]);
         $attributes['created_by'] = auth()->id();
 
-        if($attributes['status'] !== 'inProgress') {
+        if(isset($attributes['status'])) {
             $ticket = Ticket::find($attributes['ticket_id']);
             $ticket->status = $attributes['status'];
             $ticket->save();

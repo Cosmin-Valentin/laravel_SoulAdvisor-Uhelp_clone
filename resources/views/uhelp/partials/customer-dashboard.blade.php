@@ -134,9 +134,11 @@
                                                 <a href="{{ route('uhelp.show', $ticket->id) }}" class="view-ticket">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                                <div class="tooltip show">View Ticket</div>
                                                 <button class="delete-ticket">
                                                     <i class="fa fa-trash-o"></i>
                                                 </button>
+                                                <div class="tooltip delete">Delete Ticket</div>
                                             </div>
                                         </td>
                                     </tr>

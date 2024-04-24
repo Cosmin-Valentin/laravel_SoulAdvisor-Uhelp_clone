@@ -96,6 +96,7 @@
                                         <button>
                                             <i class="fa fa-edit"></i>
                                         </button>
+                                        <div class="tooltip category">Change Category</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -108,6 +109,7 @@
                                         <button>
                                             <i class="fa fa-edit"></i>
                                         </button>
+                                        <div class="tooltip priority">Change Priority</div>
                                     </td>
                                 </tr>
                                 <tr>
