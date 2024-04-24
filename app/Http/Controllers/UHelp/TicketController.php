@@ -117,4 +117,22 @@ class TicketController extends Controller
         $ticket->delete();
         return redirect()->route('uhelp.index');
     }
+
+    public function createCategory() {
+        $categories = TicketCategory::all();
+        
+        return view('uhelp.category.create', [
+            'user' => auth()->user(),
+            'categories' => $categories
+        ]);
+    }
+
+    public function storeCategory() {
+        $attributes = request()->validate([
+            'name' => 'required|string'
+        ]);
+
+        TicketCategory::create($attributes);
+        return back();
+    }
 }

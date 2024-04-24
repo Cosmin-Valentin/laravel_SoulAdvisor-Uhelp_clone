@@ -424,8 +424,6 @@ body {
 .ticket-table .ticket-details,
 .dashboard-table table .ticket-details {
     position: relative;
-    align-items: center;
-    display: flex;
 }
 
 .ticket-table .ticket-details a,
@@ -436,6 +434,7 @@ body {
     text-align: left;
     text-decoration: none;
     color: #424e79;
+    margin-bottom: 10px;
 }
 
 .ticket-table .ticket-details a:hover,
@@ -1794,7 +1793,8 @@ footer.agent-footer {
 
 .priority-modal,
 .category-modal,
-.assign-modal {
+.assign-modal,
+.add-category-modal {
     box-sizing: border-box;
     width: 480px;
     background-color: #fff;
@@ -1857,6 +1857,18 @@ footer.agent-footer {
     align-items: center;
     justify-content: flex-end;
     padding: 1rem;
+}
+
+.add-category-modal .form-group .row > div:first-child {
+    width: 20%;
+}
+
+.add-category-modal .form-group .row > div:last-child {
+    width: 80%;
+}
+
+.add-category-modal #name {
+    width: 100%;
 }
 
 .ticket-activity {

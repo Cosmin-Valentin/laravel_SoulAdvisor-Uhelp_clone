@@ -34,7 +34,9 @@ Route::prefix('uhelp')->group(function() {
     Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('uhelp.show');
     Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('uhelp.destroy');
     Route::post('/reply', [TicketController::class, 'storeReply'])->name('uhelp.storeReply');
-    Route::get('/create', [TicketController::class, 'create'])->name('uhelp.create');
-    Route::post('/create', [TicketController::class, 'store'])->name('uhelp.store');
+    Route::get('/ticket/create', [TicketController::class, 'create'])->name('uhelp.create');
+    Route::post('/ticket/create', [TicketController::class, 'store'])->name('uhelp.store');
     Route::post('/update-ticket/{ticket}', [TicketController::class, 'updateTicket'])->name('uhelp.updateTicket');
+    Route::get('/ticket/category', [TicketController::class, 'createCategory'])->name('uhelp.createCategory');
+    Route::post('/ticket/category', [TicketController::class, 'storeCategory'])->name('uhelp.storeCategory');
 });

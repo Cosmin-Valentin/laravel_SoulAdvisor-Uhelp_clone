@@ -40,15 +40,21 @@
                         <a class="slide-item {{ !isset($status) ? 'active' : '' }}" href="{{ route('uhelp.index') }}">Total Tickets</a>
                     </li>
                     <li>
-                        <a class="slide-item {{ $status == 'recent' ? 'active' : '' }}" href="{{ route('uhelp.index', 'recent') }}">Recent Tickets</a>
+                        <a class="slide-item {{ ($status ?? null) === 'recent' ? 'active' : '' }}" href="{{ route('uhelp.index', 'recent') }}">Recent Tickets</a>
                     </li>
                     <li>
-                        <a class="slide-item {{ $status == 'active' ? 'active' : '' }}" href="{{ route('uhelp.index', 'active') }}">Active Tickets</a>
+                        <a class="slide-item {{ ($status ?? null) === 'active' ? 'active' : '' }}" href="{{ route('uhelp.index', 'active') }}">Active Tickets</a>
                     </li>
                     <li>
-                        <a class="slide-item {{ $status == 'closed' ? 'active' : '' }}" href="{{ route('uhelp.index', 'closed') }}">Closed Tickets</a>
+                        <a class="slide-item {{ ($status ?? null) === 'closed' ? 'active' : '' }}" href="{{ route('uhelp.index', 'closed') }}">Closed Tickets</a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="{{ route('uhelp.createCategory') }}" class="sidebar-menu-item {{ request()->routeIs('uhelp.createCategory') ? 'active' : '' }}">
+                    <i class="fa fa-cubes"></i>
+                    <span>Create Category</span>
+                </a>
             </li>
         </ul>
     </div>

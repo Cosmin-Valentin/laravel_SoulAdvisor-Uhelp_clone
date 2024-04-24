@@ -1,31 +1,39 @@
-const btnLight = document.querySelector(".btn-light");
-const btnAssign = document.querySelectorAll(".btn-group .btn-small");
-const dropdown = document.querySelector(".btn-list .dropdown");
-const headerTime = document.querySelector(".header-info .header-time span");
-const panelTitle = document.querySelector(".panel .panel-title");
-const panelCollapse = document.querySelector(".panel .panel-collapse");
-const deleteTicketBtn = document.querySelectorAll(".actions .delete-ticket");
-const deleteTicketCancelBtn = document.querySelector(
-    ".delete-ticket-btn.cancel"
-);
-const deleteTicketSpan = document.querySelector(".delete-ticket-span");
-const deleteTicketModal = document.querySelector(".delete-ticket-overlay");
-const priorityModal = document.querySelector(".priority-overlay");
-const priorityModalCancel = document.querySelector(".priority-overlay .close");
-const editPriority = document.querySelector("#priority button");
-const categoryModal = document.querySelector(".category-overlay");
-const categoryModalCancel = document.querySelector(".category-overlay .close");
-const editCategory = document.querySelector("#category button");
-const assignModal = document.querySelector(".assign-overlay");
-const assignModalCancel = document.querySelector(".assign-overlay .close");
-const globalTicketsSide = document.querySelector(".slide-menu").parentNode;
+const addCategoryBtn = document.getElementById("add-category");
+if (addCategoryBtn) {
+    const addCategoryModal = document.querySelector(".add-category-overlay");
+    const addCategoryModalCancel = document.querySelector(
+        ".add-category-overlay .close"
+    );
+    addCategoryBtn.addEventListener("click", (e) => {
+        addCategoryModal.classList.toggle("show");
+        e.stopPropagation();
+    });
+    addCategoryModalCancel.addEventListener("click", () =>
+        addCategoryModal.classList.remove("show")
+    );
 
-if (globalTicketsSide) {
-    globalTicketsSide.addEventListener("click", () => {
-        globalTicketsSide.classList.toggle("is-expanded");
+    document.addEventListener("click", (e) => {
+        if (e.target === addCategoryModal) {
+            addCategoryModal.classList.remove("show");
+        }
     });
 }
 
+const globalTicketsSide = document.querySelector(".slide-menu");
+if (globalTicketsSide) {
+    globalTicketsSide.parentNode.addEventListener("click", () => {
+        globalTicketsSide.parentNode.classList.toggle("is-expanded");
+    });
+}
+
+const deleteTicketModal = document.querySelector(".delete-ticket-overlay");
+const deleteTicketBtn = document.querySelectorAll(
+    ".dashboard-table:not(.collections-table) .actions .delete-ticket"
+);
+
+const deleteTicketCancelBtn = document.querySelector(
+    ".delete-ticket-btn.cancel"
+);
 if (deleteTicketBtn.length > 0) {
     deleteTicketBtn.forEach((btn) => {
         const tooltipDelete = btn.parentNode.querySelector(".tooltip.delete");
@@ -70,9 +78,29 @@ if (deleteTicketBtn.length > 0) {
         deleteTicketModal.classList.remove("show");
     });
 }
+const deleteTicketSpan = document.querySelector(".delete-ticket-span");
+if (deleteTicketSpan && deleteTicketModal) {
+    deleteTicketSpan.addEventListener("click", (e) => {
+        deleteTicketModal.classList.toggle("show");
+        e.stopPropagation();
+    });
 
+    document.addEventListener("click", (e) => {
+        if (e.target === deleteTicketModal) {
+            deleteTicketModal.classList.remove("show");
+        }
+    });
+
+    deleteTicketCancelBtn.addEventListener("click", () => {
+        deleteTicketModal.classList.remove("show");
+    });
+}
+
+const btnAssign = document.querySelectorAll(".btn-group .btn-small");
 if (btnAssign.length > 0) {
     const otherBtn = document.querySelectorAll("#other");
+    const assignModal = document.querySelector(".assign-overlay");
+    const assignModalCancel = document.querySelector(".assign-overlay .close");
 
     btnAssign.forEach((btn) => {
         const parent = btn.parentNode;
@@ -111,6 +139,9 @@ if (btnAssign.length > 0) {
     });
 }
 
+const categoryModal = document.querySelector(".category-overlay");
+const categoryModalCancel = document.querySelector(".category-overlay .close");
+const editCategory = document.querySelector("#category button");
 if (categoryModal && categoryModalCancel && editCategory) {
     const tooltipCategory =
         editCategory.parentNode.querySelector(".tooltip.category");
@@ -139,6 +170,9 @@ if (categoryModal && categoryModalCancel && editCategory) {
     });
 }
 
+const priorityModal = document.querySelector(".priority-overlay");
+const priorityModalCancel = document.querySelector(".priority-overlay .close");
+const editPriority = document.querySelector("#priority button");
 if (priorityModal && priorityModalCancel && editPriority) {
     const tooltipPriority =
         editPriority.parentNode.querySelector(".tooltip.priority");
@@ -167,23 +201,8 @@ if (priorityModal && priorityModalCancel && editPriority) {
     });
 }
 
-if (deleteTicketSpan && deleteTicketModal) {
-    deleteTicketSpan.addEventListener("click", (e) => {
-        deleteTicketModal.classList.toggle("show");
-        e.stopPropagation();
-    });
-
-    document.addEventListener("click", (e) => {
-        if (e.target === deleteTicketModal) {
-            deleteTicketModal.classList.remove("show");
-        }
-    });
-
-    deleteTicketCancelBtn.addEventListener("click", () => {
-        deleteTicketModal.classList.remove("show");
-    });
-}
-
+const panelTitle = document.querySelector(".panel .panel-title");
+const panelCollapse = document.querySelector(".panel .panel-collapse");
 if (panelCollapse && panelTitle) {
     panelTitle.addEventListener("click", () => {
         panelTitle.classList.toggle("collapsed");
@@ -191,6 +210,8 @@ if (panelCollapse && panelTitle) {
     });
 }
 
+const btnLight = document.querySelector(".btn-light");
+const dropdown = document.querySelector(".btn-list .dropdown");
 if (btnLight && dropdown) {
     btnLight.addEventListener("click", (e) => {
         dropdown.classList.toggle("show");
@@ -204,6 +225,7 @@ if (btnLight && dropdown) {
     });
 }
 
+const headerTime = document.querySelector(".header-info .header-time span");
 if (headerTime) {
     updateTime();
     setInterval(updateTime, 60000);
