@@ -90,7 +90,7 @@ class TicketController extends Controller
         return back();
     }
 
-    public function updateTicket(Ticket $ticket) {
+    public function update(Ticket $ticket) {
         $attributes = request()->validate([
             'priority' => 'sometimes|required|string',
             'category_id' => 'sometimes|required|exists:ticket_categories,id',
@@ -116,23 +116,5 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket) {
         $ticket->delete();
         return redirect()->route('uhelp.index');
-    }
-
-    public function createCategory() {
-        $categories = TicketCategory::all();
-        
-        return view('uhelp.category.create', [
-            'user' => auth()->user(),
-            'categories' => $categories
-        ]);
-    }
-
-    public function storeCategory() {
-        $attributes = request()->validate([
-            'name' => 'required|string'
-        ]);
-
-        TicketCategory::create($attributes);
-        return back();
     }
 }

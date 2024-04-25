@@ -5,6 +5,7 @@ require __DIR__.'/auth.php';
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UHelp\TicketController;
 use App\Http\Controllers\SoulAdvisor\ProfileController as SoulAdvisorProfileController;
+use App\Http\Controllers\UHelp\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,7 +37,10 @@ Route::prefix('uhelp')->group(function() {
     Route::post('/reply', [TicketController::class, 'storeReply'])->name('uhelp.storeReply');
     Route::get('/ticket/create', [TicketController::class, 'create'])->name('uhelp.create');
     Route::post('/ticket/create', [TicketController::class, 'store'])->name('uhelp.store');
-    Route::post('/update-ticket/{ticket}', [TicketController::class, 'updateTicket'])->name('uhelp.updateTicket');
-    Route::get('/ticket/category', [TicketController::class, 'createCategory'])->name('uhelp.createCategory');
-    Route::post('/ticket/category', [TicketController::class, 'storeCategory'])->name('uhelp.storeCategory');
+    Route::post('/update-ticket/{ticket}', [TicketController::class, 'update'])->name('uhelp.updateTicket');
+
+    Route::get('/ticket/category', [CategoryController::class, 'create'])->name('uhelp.createCategory');
+    Route::post('/ticket/category', [CategoryController::class, 'store'])->name('uhelp.storeCategory');
+    Route::delete('/ticket/category/{ticketCategory}', [CategoryController::class, 'destroy'])->name('uhelp.destroyCategory');
+    Route::post('/update-category/{ticketCategory}', [CategoryController::class, 'update'])->name('uhelp.updateCategory');
 });

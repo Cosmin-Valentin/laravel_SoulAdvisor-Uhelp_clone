@@ -1,4 +1,4 @@
-<div class="delete-ticket-overlay">
+<div class="delete-modal-overlay">
     <div class="delete-modal">
         <div class="modal-icon">
             <div class="icon-body">
@@ -9,14 +9,17 @@
         <div class="modal-text">This might erase your records permanently</div>
         <div class="modal-footer">
             <div>
-                <button class="delete-ticket-btn cancel">Cancel</button>
+                <button class="delete-modal-btn cancel">Cancel</button>
             </div>
             <div>
-                <form method="POST" action="{{ route('uhelp.destroy', $ticket->id ?? '1') }}">
+                @if (($formType ?? null) === 'category')
+                    <form method="POST" action="{{ route('uhelp.destroyCategory', '1') }}">
+                @else
+                    <form method="POST" action="{{ route('uhelp.destroy', $ticket->id ?? '1') }}">
+                @endif
                     @csrf
                     @method('delete')
-                    <input type="hidden">
-                    <button type="submit" class="delete-ticket-btn confirm">Ok</button>
+                    <button type="submit" class="delete-modal-btn confirm">Ok</button>
                 </form>
             </div>
         </div>

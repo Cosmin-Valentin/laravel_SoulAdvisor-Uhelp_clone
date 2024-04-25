@@ -1,4 +1,4 @@
-<div class="ticket-edit-modal assign-overlay">
+<div class="update-modal assign-overlay">
     <div class="assign-modal">
         <div class="modal-header">
             <h5 class="modal-title">Assign To Agent</h5>

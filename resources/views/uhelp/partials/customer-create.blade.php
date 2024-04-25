@@ -27,7 +27,9 @@
                         <select name="category_id" class="ticket-form-control" id="category" required>
                             <option label="Select Category"></option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ ucwords($category->name) }}</option>                                   
+                                @if ($category->status)
+                                    <option value="{{ $category->id }}">{{ ucwords($category->name) }}</option>                                   
+                                @endif
                             @endforeach
                         </select>
                     </div>

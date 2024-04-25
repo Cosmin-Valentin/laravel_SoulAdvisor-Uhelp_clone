@@ -24,7 +24,7 @@
                                         <div>
                                             <div class="row">
                                                 <div>
-                                                    <table class="table-format collections-table">
+                                                    <table class="table-format categories-table">
                                                         <thead>
                                                             <tr>
                                                                 <th>No.</th>
@@ -44,10 +44,10 @@
                                                                     <td class="remove-column-data">
                                                                         <input type="checkbox" autocomplete="off">
                                                                     </td>
-                                                                    <td class="ticket-details">
+                                                                    <td data-category-id="{{ $category->id }}">
                                                                         {{ ucwords($category->name) }}
                                                                     </td>
-                                                                    <td>Enabled</td>
+                                                                    <td data-category-status="{{ $category->status }}">{{ $category->status ? 'Enabled' : 'Disabled' }}</td>
                                                                     <td>
                                                                         <div class="actions">
                                                                             <button class="action-view" data-tooltip="View Category">
@@ -81,3 +81,5 @@
 @endsection
 
 @include('uhelp.modals.add-category')
+@include('uhelp.modals.edit-category')
+@include('uhelp.modals.delete', ['formType' => 'category'])

@@ -19,7 +19,7 @@
         @include('uhelp.partials.footer')
     @endsection
     
-    @include('uhelp.modals.delete-ticket')
+    @include('uhelp.modals.delete')
     @include('uhelp.modals.priority')
     @include('uhelp.modals.category')
     @include('uhelp.modals.assign')

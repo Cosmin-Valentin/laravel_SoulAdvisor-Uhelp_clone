@@ -40,7 +40,7 @@ class Ticket extends Model
     public function getStatusHtmlAttribute() {
         switch ($this->status) {
             case 'inProgress':
-                if($this->created_at > Carbon::now()->subDays(2)) {
+                if($this->created_at > Carbon::now()->subDays(2) && !isset($this->assignee_id)) {
                     return '<span class="badge badge-orange">New</span>';
                 } else {
                     return '<span class="badge badge-info">In-Progress</span>';

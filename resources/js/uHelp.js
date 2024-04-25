@@ -1,57 +1,121 @@
 // Ticket view reply form panel toggle
-const panelTitle = document.querySelector(".panel .panel-title");
-const panelCollapse = document.querySelector(".panel .panel-collapse");
+const replyBtn = document.querySelector(".panel .panel-title");
+const replyPannel = document.querySelector(".panel .panel-collapse");
 
-if (panelTitle && panelCollapse) {
-    panelTitle.addEventListener("click", () => {
-        panelTitle.classList.toggle("collapsed");
-        panelCollapse.classList.toggle("show");
+if (replyBtn && replyPannel) {
+    replyBtn.addEventListener("click", () => {
+        replyBtn.classList.toggle("collapsed");
+        replyPannel.classList.toggle("show");
     });
 }
 
-// Delete ticket modal
-const deleteTicketModal = document.querySelector(".delete-ticket-overlay");
-const deleteTicketBtns = document.querySelectorAll(
-    ".table-format .actions .action-delete"
-);
-const deleteTicketCancelBtn = document.querySelector(
-    ".delete-ticket-btn.cancel"
+// Delete ticket/collection modal
+const deleteModal = document.querySelector(".delete-modal-overlay");
+const deleteCancel = document.querySelector(".delete-modal-btn.cancel");
+const deleteTicket = document.querySelectorAll(
+    ".table-format:not(.categories-table) .action-delete"
 );
 const deleteTicketSpan = document.querySelector(".quick-delete-ticket");
-if (deleteTicketModal && deleteTicketCancelBtn) {
-    if (deleteTicketBtns.length > 0) {
-        deleteTicketBtns.forEach((btn) => {
-            btn.addEventListener("click", (e) => {
-                deleteTicketModal.classList.toggle("show");
-                e.stopPropagation();
-                updateFormTicketId(
-                    document.querySelector(".delete-modal form"),
-                    btn
-                );
-            });
-        });
+const deleteCategory = document.querySelectorAll(
+    ".categories-table .action-delete"
+);
+if (deleteModal && deleteCancel) {
+    if (deleteTicket.length > 0) {
+        setupDeleteButtons(deleteTicket, true);
+    }
+
+    if (deleteCategory.length > 0) {
+        setupDeleteButtons(deleteCategory, false);
     }
 
     document.addEventListener("click", (e) => {
         if (
-            e.target === deleteTicketModal ||
-            e.target === deleteTicketCancelBtn ||
+            e.target === deleteModal ||
+            e.target === deleteCancel ||
             e.target === deleteTicketSpan
         ) {
-            deleteTicketModal.classList.remove("show");
+            deleteModal.classList.remove("show");
         }
     });
 
-    deleteTicketCancelBtn.addEventListener("click", () =>
-        deleteTicketModal.classList.remove("show")
+    deleteCancel.addEventListener("click", () =>
+        deleteModal.classList.remove("show")
     );
 
     if (deleteTicketSpan) {
         deleteTicketSpan.addEventListener("click", (e) => {
-            deleteTicketModal.classList.toggle("show");
+            deleteModal.classList.toggle("show");
             e.stopPropagation();
         });
     }
+}
+function setupDeleteButtons(buttons, isCategory = true) {
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            deleteModal.classList.toggle("show");
+            e.stopPropagation();
+            updateFormId(
+                document.querySelector(".delete-modal form"),
+                btn,
+                isCategory
+            );
+        });
+    });
+}
+
+// Admin category page edit modal
+const editCatModal = document.querySelector(".edit-category-overlay");
+const editCats = document.querySelectorAll(".categories-table .action-view");
+
+if (editCatModal && editCats.length > 0) {
+    const editCatCancel = editCatModal.querySelector(".close");
+    const form = editCatModal.querySelector("form");
+    const nameInput = editCatModal.querySelector("#name");
+    const statusInput = editCatModal.querySelector("#status");
+
+    editCats.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            toggleModal(e, btn, nameInput, statusInput, form);
+        });
+    });
+
+    document.addEventListener("click", (e) => {
+        if (
+            e.target === editCatModal ||
+            e.target === editCatCancel ||
+            editCatCancel.contains(e.target)
+        ) {
+            editCatModal.classList.remove("show");
+        }
+    });
+}
+
+function toggleModal(event, button, nameInput, statusInput, form) {
+    event.stopPropagation();
+    populateFormData(button, nameInput, statusInput, form);
+    editCatModal.classList.toggle("show");
+}
+
+function populateFormData(button, nameInput, statusInput, form) {
+    const tRow = button.closest("tr");
+    const id = tRow?.querySelector("[data-category-id]")?.dataset.categoryId;
+    const status = tRow?.querySelector("[data-category-status]")?.dataset
+        .categoryStatus;
+
+    nameInput.value = tRow
+        .querySelector("[data-category-id]")
+        .textContent.trim()
+        .toLowerCase();
+    statusInput.checked = +status;
+
+    if (form && id) {
+        updateFormAction(id, form);
+    }
+}
+
+function updateFormAction(id, form) {
+    const formUrl = form.getAttribute("action");
+    form.setAttribute("action", formUrl.replace(/(\d+)(?!.*\d)/, id));
 }
 
 // Admin ticket view page category/priority edit modal
@@ -96,10 +160,7 @@ if (btnAssign.length > 0) {
 
             if (e.target === btn) {
                 dropdownMenu.classList.toggle("show");
-                updateFormTicketId(
-                    document.querySelector(".assign-modal form"),
-                    btn
-                );
+                updateFormId(document.querySelector(".assign-modal form"), btn);
                 e.stopPropagation();
             } else if (!parent.contains(e.target)) {
                 dropdownMenu.classList.remove("show");
@@ -123,12 +184,18 @@ if (btnAssign.length > 0) {
     );
 }
 
-function updateFormTicketId(form, btn) {
-    const ticketId = btn.closest("tr")?.querySelector(".ticket-details")
-        ?.dataset.ticketId;
-    if (form && ticketId) {
+function updateFormId(form, btn, ticketForm = true) {
+    let id = 1;
+    if (ticketForm) {
+        id = btn.closest("tr")?.querySelector(".ticket-details")
+            ?.dataset.ticketId;
+    } else {
+        id = btn.closest("tr")?.querySelector("[data-category-id]")
+            ?.dataset.categoryId;
+    }
+    if (form && id) {
         const formUrl = form.getAttribute("action");
-        form.setAttribute("action", formUrl.replace(/(\d+)(?!.*\d)/, ticketId));
+        form.setAttribute("action", formUrl.replace(/(\d+)(?!.*\d)/, id));
     }
 }
 
@@ -144,6 +211,7 @@ if (addCategoryBtn) {
             e.stopPropagation();
         } else if (
             e.target === addCategoryModalCancel ||
+            addCategoryModalCancel.contains(e.target) ||
             e.target === addCategoryModal
         ) {
             addCategoryModal.classList.remove("show");

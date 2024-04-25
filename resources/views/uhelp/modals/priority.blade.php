@@ -1,4 +1,4 @@
-<div class="ticket-edit-modal priority-overlay">
+<div class="update-modal priority-overlay">
     <div class="priority-modal">
         <div class="modal-header">
             <h5 class="modal-title">Priority</h5>

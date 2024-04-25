@@ -41,7 +41,7 @@
         @include('uhelp.partials.footer')
     @endsection
 @endif
-@include('uhelp.modals.delete-ticket')
+@include('uhelp.modals.delete')
 
 {{-- <x-slot name="header">
         @include('elements.back-button', [

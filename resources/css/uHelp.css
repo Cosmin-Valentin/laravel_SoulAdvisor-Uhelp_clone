@@ -1569,13 +1569,13 @@ footer.agent-footer {
     padding: 0 1.5rem;
 }
 
-.delete-ticket-overlay.show {
+.delete-modal-overlay.show {
     opacity: 1;
     pointer-events: auto;
     transition: opacity 0.3s;
 }
 
-.delete-ticket-overlay {
+.delete-modal-overlay {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -1677,7 +1677,7 @@ footer.agent-footer {
     position: relative;
 }
 
-.delete-modal .delete-ticket-btn {
+.delete-modal .delete-modal-btn {
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -1692,31 +1692,31 @@ footer.agent-footer {
     border-radius: 5px;
 }
 
-.delete-ticket-btn.cancel {
+.delete-modal-btn.cancel {
     color: #fff;
     background: #f11541;
 }
 
-.delete-ticket-btn.confirm {
+.delete-modal-btn.confirm {
     color: #fff;
     background: #3366ff;
 }
 
-.delete-ticket-btn.cancel:hover {
+.delete-modal-btn.cancel:hover {
     background: #7c071f;
 }
 
-.delete-ticket-btn.confirm:hover {
+.delete-modal-btn.confirm:hover {
     background: #404ef7;
 }
 
-.ticket-edit-modal.show {
+.update-modal.show {
     opacity: 1;
     pointer-events: auto;
     transition: opacity 0.3s;
 }
 
-.ticket-edit-modal {
+.update-modal {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -1734,7 +1734,8 @@ footer.agent-footer {
 .priority-modal,
 .category-modal,
 .assign-modal,
-.add-category-modal {
+.add-category-modal,
+.edit-category-modal {
     box-sizing: border-box;
     width: 480px;
     background-color: #fff;
@@ -1749,7 +1750,7 @@ footer.agent-footer {
     border-radius: 3px;
 }
 
-.ticket-edit-modal .modal-header {
+.update-modal .modal-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -1757,13 +1758,13 @@ footer.agent-footer {
     border-bottom: 1px solid #e6ebf1;
 }
 
-.ticket-edit-modal .modal-title {
+.update-modal .modal-title {
     margin-bottom: 0;
     line-height: 1.5;
     font-size: 16px;
 }
 
-.ticket-edit-modal .close {
+.update-modal .close {
     cursor: pointer;
     padding: 1rem;
     margin: -1rem -1rem -1rem auto;
@@ -1777,37 +1778,40 @@ footer.agent-footer {
     opacity: 0.5;
 }
 
-.ticket-edit-modal .close:hover {
+.update-modal .close:hover {
     color: #000;
     opacity: 0.75;
 }
 
-.ticket-edit-modal .modal-body {
+.update-modal .modal-body {
     position: relative;
     padding: 1rem;
     border-bottom: 1px solid #e6ebf1;
 }
 
-.ticket-edit-modal select {
+.update-modal select {
     width: 100%;
 }
 
-.ticket-edit-modal .modal-footer {
+.update-modal .modal-footer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding: 1rem;
 }
 
-.add-category-modal .form-group .row > div:first-child {
+.add-category-modal .form-group .row > div:first-child,
+.edit-category-modal .form-group .row > div:first-child {
     width: 20%;
 }
 
-.add-category-modal .form-group .row > div:last-child {
+.add-category-modal .form-group .row > div:last-child,
+.edit-category-modal .form-group .row > div:last-child {
     width: 80%;
 }
 
-.add-category-modal #name {
+.add-category-modal #name,
+.edit-category-modal #name {
     width: 100%;
 }
 
