@@ -26,7 +26,7 @@
                     <i class="fa fa-ellipsis-v"></i>
                 </button>
                 <div class="dropdown">
-                    <span class="delete-ticket-span">
+                    <span class="quick-delete-ticket">
                         <i class="fa fa-trash"></i>
                         Delete Ticket
                     </span>

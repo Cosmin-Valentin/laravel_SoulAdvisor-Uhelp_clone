@@ -85,7 +85,7 @@
             <div class="card-body">
                 <div class="card-table">
                     <div class="row">
-                        <table class="ticket-table">
+                        <table class="table-format customer-dashboard-table">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -130,16 +130,7 @@
                                             {!! $ticket->status_html !!}
                                         </td>
                                         <td>
-                                            <div class="actions">
-                                                <a href="{{ route('uhelp.show', $ticket->id) }}" class="view-ticket">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <div class="tooltip show">View Ticket</div>
-                                                <button class="delete-ticket">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </button>
-                                                <div class="tooltip delete">Delete Ticket</div>
-                                            </div>
+                                            @include('uhelp.elements.form-actions')
                                         </td>
                                     </tr>
                                 @endforeach

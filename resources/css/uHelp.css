@@ -331,13 +331,11 @@ body {
 }
 
 .card-table,
-.ticket-table,
-.dashboard-table table {
+.table-format {
     width: 100%;
 }
 
-.ticket-table,
-.dashboard-table table {
+.table-format {
     clear: both;
     margin: 6px 0;
     border-collapse: separate;
@@ -346,13 +344,11 @@ body {
     border: 1px solid #dee2e6;
 }
 
-.ticket-table thead,
-.dashboard-table table thead {
+.table-format thead {
     vertical-align: bottom;
 }
 
-.ticket-table thead tr th,
-.dashboard-table table thead tr th {
+.table-format thead tr th {
     padding: 10px 18px;
     border-bottom: 1px solid #dee2e6;
     border-right: 1px solid #dee2e6;
@@ -362,72 +358,59 @@ body {
     position: relative;
 }
 
-.ticket-table thead tr th:last-child,
-.dashboard-table table thead tr th:last-child {
+.table-format thead tr th:last-child {
     border-right: 0;
 }
 
-.ticket-table thead tr th.sorting::before,
-.dashboard-table table thead tr th.sorting::before {
+.table-format thead tr th.sorting::before {
     right: 1em;
     content: "↑";
 }
 
-.ticket-table thead tr th.sorting::after,
-.dashboard-table table thead tr th.sorting::after {
+.table-format thead tr th.sorting::after {
     right: 0.5em;
     content: "↓";
 }
-.ticket-table thead tr th.sorting::before,
-.dashboard-table table thead tr th.sorting::before,
-.ticket-table thead tr th.sorting::after,
-.dashboard-table table thead tr th.sorting::after {
+.table-format thead tr th.sorting::before,
+.table-format thead tr th.sorting::after {
     position: absolute;
     bottom: 0.7em;
     display: block;
     opacity: 0.3;
 }
 
-.ticket-table input[type="checkbox"],
-.dashboard-table table input[type="checkbox"],
+.table-format input[type="checkbox"],
 .ticket-form-checkbox input[type="checkbox"] {
     border-radius: 3px;
 }
 
-.ticket-table input[type="checkbox"]:focus,
-.dashboard-table table input[type="checkbox"]:focus,
-.ticket-table input[type="checkbox"]:valid,
-.dashboard-table table input[type="checkbox"]:valid,
+.table-format input[type="checkbox"]:focus,
+.table-format input[type="checkbox"]:valid,
 .ticket-form-checkbox input[type="checkbox"]:focus,
 .ticket-form-checkbox input[type="checkbox"]:valid {
     outline: none;
 }
 
-.ticket-table tbody tr td,
-.dashboard-table table tbody tr td {
+.table-format tbody tr td {
     border-bottom: 1px solid #dee2e6;
     border-right: 1px solid #dee2e6;
     padding: 10px 18px;
     text-align: center;
 }
 
-.dashboard-table table tbody tr td:last-child,
-.ticket-table tbody tr td:last-child {
+.table-format tbody tr td:last-child {
     border-right: none;
 }
 
-.ticket-table tbody tr:last-child td,
-.dashboard-table table tbody tr:last-child td {
+.table-format tbody tr:last-child td {
     border-bottom: none;
 }
 
-.ticket-table .ticket-details,
-.dashboard-table table .ticket-details {
+.table-format .ticket-details {
     position: relative;
 }
 
-.ticket-table .ticket-details a,
-.dashboard-table table .ticket-details a {
+.table-format .ticket-details a {
     display: block;
     font-size: 15px;
     font-weight: 600;
@@ -437,13 +420,11 @@ body {
     margin-bottom: 10px;
 }
 
-.ticket-table .ticket-details a:hover,
-.dashboard-table table .ticket-details a:hover {
+.table-format .ticket-details a:hover {
     color: var(--primary-color);
 }
 
-.ticket-table .ticket-details ul,
-.dashboard-table table .ticket-details ul {
+.table-format .ticket-details ul {
     font-size: 13px;
     font-weight: 400;
     display: flex;
@@ -452,20 +433,17 @@ body {
     margin: 0;
 }
 
-.ticket-table .ticket-details ul li,
-.dashboard-table table .ticket-details ul li {
+.table-format .ticket-details ul li {
     position: relative;
     color: #9ba5ca;
     padding: 0 0.75rem;
 }
 
-.ticket-table .ticket-details ul li:first-child,
-.dashboard-table table .ticket-details ul li:first-child {
+.table-format .ticket-details ul li:first-child {
     padding-left: 0;
 }
 
-.ticket-table .ticket-details ul li:not(:last-child)::after,
-.dashboard-table table .ticket-details ul li:not(:last-child)::after {
+.table-format .ticket-details ul li:not(:last-child)::after {
     content: "";
     position: absolute;
     height: 15px;
@@ -475,13 +453,11 @@ body {
     top: 2px;
 }
 
-.ticket-table .ticket-details ul li.preference,
-.dashboard-table table .ticket-details ul li.preference {
+.table-format .ticket-details ul li.preference {
     padding-left: 1.25rem;
 }
 
-.ticket-table .ticket-details ul li.preference::before,
-.dashboard-table table .ticket-details ul li.preference::before {
+.table-format .ticket-details ul li.preference::before {
     content: "";
     position: absolute;
     width: 10px;
@@ -491,43 +467,35 @@ body {
     top: 4px;
 }
 
-.ticket-table .ticket-details .preference.low,
-.dashboard-table table .ticket-details .preference.low {
+.table-format .ticket-details .preference.low {
     color: #0dcd94;
 }
 
-.ticket-table .ticket-details .preference.low::before,
-.dashboard-table table .ticket-details .preference.low::before {
+.table-format .ticket-details .preference.low::before {
     background-color: #0dcd94;
 }
 
-.ticket-table .ticket-details .preference.medium,
-.dashboard-table table .ticket-details .preference.medium {
+.table-format .ticket-details .preference.medium {
     color: #fbc518;
 }
 
-.ticket-table .ticket-details .preference.medium::before,
-.dashboard-table table .ticket-details .preference.medium::before {
+.table-format .ticket-details .preference.medium::before {
     background-color: #fbc518;
 }
 
-.ticket-table .ticket-details .preference.high,
-.dashboard-table table .ticket-details .preference.high {
+.table-format .ticket-details .preference.high {
     color: #ef4eb8;
 }
 
-.ticket-table .ticket-details .preference.high::before,
-.dashboard-table table .ticket-details .preference.high::before {
+.table-format .ticket-details .preference.high::before {
     background-color: #ef4eb8;
 }
 
-.ticket-table .ticket-details .preference.critical,
-.dashboard-table table .ticket-details .preference.critical {
+.table-format .ticket-details .preference.critical {
     color: #f7284a;
 }
 
-.ticket-table .ticket-details .preference.critical::before,
-.dashboard-table table .ticket-details .preference.critical::before {
+.table-format .ticket-details .preference.critical::before {
     background-color: #f7284a;
 }
 
@@ -580,15 +548,14 @@ body {
     background-color: #af0000;
 }
 
-.ticket-table .actions,
-.dashboard-table table .actions {
+.table-format .actions {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
-.dashboard-table table .actions,
+.agent-dashboard-table table .actions,
 form#close,
 form#reOpen {
     margin: 0;
@@ -598,10 +565,8 @@ form#reOpen .btn-ticket {
     height: 40px;
 }
 
-.ticket-table .actions a,
-.dashboard-table table .actions a,
-.ticket-container table .actions .delete-ticket,
-.dashboard-table table .actions .delete-ticket {
+.table-format .action-view,
+.table-format .action-delete {
     width: 2rem;
     height: 2rem;
     line-height: 2rem;
@@ -613,91 +578,66 @@ form#reOpen .btn-ticket {
     text-decoration: none;
 }
 
-.ticket-table .view-ticket,
-.dashboard-table table .view-ticket {
+.table-format .action-view {
     color: var(--primary-color);
 }
 
-.ticket-table .delete-ticket,
-.dashboard-table table .delete-ticket {
+.table-format .action-delete {
     color: #f7284a;
 }
 
-.ticket-table .actions a i {
+.customer-dashboard-table .actions a i {
     margin: 6px 0px 0px 1px;
     cursor: pointer;
 }
 
-.dashboard-table .actions a i {
+.agent-dashboard-table .actions a i {
     margin-top: 6px;
     cursor: pointer;
 }
 
-.tooltip {
+*[data-tooltip] {
+    position: relative;
+}
+
+*[data-tooltip]::after {
+    content: attr(data-tooltip);
     position: absolute;
-    bottom: 37px;
+    top: -35px;
+    right: -30px;
+    width: 110px;
+    z-index: 1000;
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
     border: 1px solid #222;
     background-color: #222;
     color: #fff;
     padding: 5px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    visibility: hidden;
+    pointer-events: none;
     opacity: 0;
-    transition: opacity 0.5s;
+    transition: opacity 0.3s ease;
 }
 
-.agent-side-table .tooltip {
-    bottom: 45px;
-    font-size: 12px;
-    font-weight: 400;
-}
-
-.tooltip::before {
+*[data-tooltip]::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -7px;
+    left: 5px;
     bottom: 0;
-    transform: translate3d(45px, 29px, 0px);
     border-width: 0.4rem 0.4rem 0;
     border-color: #222 transparent transparent transparent;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.agent-side-table .tooltip::before {
-    transform: translate3d(45px, 25px, 0px);
-}
-
-.tooltip.show-tooltip {
+*[data-tooltip]:hover::before,
+*[data-tooltip]:hover::after {
     opacity: 1;
-    visibility: visible;
-}
-
-.actions .tooltip.show {
-    right: 34px;
-}
-
-.actions .tooltip.delete {
-    left: 15px;
-}
-
-.ticket-container .actions .tooltip.show {
-    right: 44px;
-}
-
-.ticket-container .actions .tooltip.delete {
-    left: 27px;
-}
-
-.agent-side-table .tooltip.category {
-    right: 33px;
-    width: 105px;
-    bottom: 43px;
-}
-
-.agent-side-table .tooltip.priority {
-    right: 12px;
 }
 
 footer.customer-footer {
@@ -1745,7 +1685,7 @@ footer.agent-footer {
     vertical-align: middle;
     cursor: pointer;
     border: 1px solid transparent;
-    line-height: 1.9;
+    line-height: 1.4;
     font-size: 14px;
     padding: 0.3rem 0.7rem;
     letter-spacing: 0.4px;

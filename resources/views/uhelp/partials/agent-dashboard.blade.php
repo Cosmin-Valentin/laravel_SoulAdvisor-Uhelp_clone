@@ -87,10 +87,10 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <div class="dashboard-table">
+                        <div>
                             <div class="row">
                                 <div>
-                                    <table>
+                                    <table class="table-format agent-dashboard-table">
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
@@ -141,16 +141,7 @@
                                                         @include('uhelp.elements.btn-group')
                                                     </td>
                                                     <td>
-                                                        <div class="actions">
-                                                            <a href="{{ route('uhelp.show', $ticket->id) }}" class="view-ticket">
-                                                                <i class="fa fa-eye"></i>
-                                                            </a>
-                                                            <div class="tooltip show">View Ticket</div>
-                                                            <button class="delete-ticket">
-                                                                <i class="fa fa-trash-o"></i>
-                                                            </button>
-                                                            <div class="tooltip delete">Delete Ticket</div>
-                                                        </div>
+                                                        @include('uhelp.elements.form-actions')
                                                     </td>
                                                 </tr>
                                             @endforeach

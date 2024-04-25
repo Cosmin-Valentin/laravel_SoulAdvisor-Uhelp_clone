@@ -93,10 +93,9 @@
                                     <td>:</td>
                                     <td id="category">
                                         <span>{{ ucwords($ticket->category->name) }}</span>
-                                        <button>
+                                        <button data-tooltip="Change Category">
                                             <i class="fa fa-edit"></i>
                                         </button>
-                                        <div class="tooltip category">Change Category</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -106,10 +105,9 @@
                                     <td>:</td>
                                     <td id="priority">
                                         {!! $ticket->priority_html !!}
-                                        <button>
+                                        <button data-tooltip="Change Priority">
                                             <i class="fa fa-edit"></i>
                                         </button>
-                                        <div class="tooltip priority">Change Priority</div>
                                     </td>
                                 </tr>
                                 <tr>

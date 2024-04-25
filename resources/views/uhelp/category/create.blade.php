@@ -21,10 +21,10 @@
                                 </div>
                                 <div class="card-body">
                                     <div>
-                                        <div class="dashboard-table collections-table">
+                                        <div>
                                             <div class="row">
                                                 <div>
-                                                    <table>
+                                                    <table class="table-format collections-table">
                                                         <thead>
                                                             <tr>
                                                                 <th>No.</th>
@@ -50,14 +50,12 @@
                                                                     <td>Enabled</td>
                                                                     <td>
                                                                         <div class="actions">
-                                                                            <button class="view-ticket">
+                                                                            <button class="action-view" data-tooltip="View Category">
                                                                                 <i class="fa fa-eye"></i>
                                                                             </button>
-                                                                            <div class="tooltip show">View Ticket</div>
-                                                                            <button class="delete-ticket">
+                                                                            <button class="action-delete" data-tooltip="Delete Category">
                                                                                 <i class="fa fa-trash-o"></i>
                                                                             </button>
-                                                                            <div class="tooltip delete">Delete Ticket</div>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
