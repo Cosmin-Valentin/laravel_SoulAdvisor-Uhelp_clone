@@ -32,13 +32,14 @@ Route::prefix('list-practice')->group(function() {
 
 Route::prefix('uhelp')->group(function() {
     Route::get('/{status?}', [TicketController::class, 'index'])->name('uhelp.index');
-    Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('uhelp.show');
-    Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('uhelp.destroy');
     Route::post('/reply', [TicketController::class, 'storeReply'])->name('uhelp.storeReply');
-    Route::get('/ticket/create', [TicketController::class, 'create'])->name('uhelp.create');
-    Route::post('/ticket/create', [TicketController::class, 'store'])->name('uhelp.store');
     Route::post('/update-ticket/{ticket}', [TicketController::class, 'update'])->name('uhelp.updateTicket');
     Route::get('ticket/customer/{user?}', [TicketController::class, 'showCustomer'])->name('uhelp.showCustomer');
+
+    Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('uhelp.show');
+    Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('uhelp.destroy');
+    Route::get('/ticket/create', [TicketController::class, 'create'])->name('uhelp.create');
+    Route::post('/ticket/create', [TicketController::class, 'store'])->name('uhelp.store');
 
     Route::get('/ticket/category', [CategoryController::class, 'create'])->name('uhelp.createCategory');
     Route::post('/ticket/category', [CategoryController::class, 'store'])->name('uhelp.storeCategory');
