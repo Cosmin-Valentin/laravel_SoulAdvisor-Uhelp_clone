@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function create() {
         $categories = TicketCategory::all();
         
-        return view('uhelp.category.create', [
+        return view('uhelp.sections.category', [
             'user' => auth()->user(),
             'categories' => $categories
         ]);

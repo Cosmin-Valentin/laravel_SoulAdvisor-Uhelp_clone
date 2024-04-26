@@ -117,4 +117,27 @@ class TicketController extends Controller
         $ticket->delete();
         return redirect()->route('uhelp.index');
     }
+
+    public function showCustomer($userId = null) {
+        $currentUser = auth()->user();
+    
+        if ($userId) {
+            return view('uhelp.sections.show-customer', [
+                'user' => $currentUser,
+                'users' => User::where('id', '!=', $currentUser->id)->get(),
+                'tickets' => Ticket::where('created_by', $userId)->orderBy('created_at','desc')->get(),
+                'customer' => User::findOrFail($userId), 
+            ]);
+        } else {
+            $query = User::query();
+            if ($currentUser->isAdmin) {
+                $query->where('id', '!=', $currentUser->id);
+            }
+    
+            return view('uhelp.sections.show-customers', [
+                'user' => $currentUser,
+                'customers' => $query->orderBy('created_at', 'desc')->get()
+            ]);
+        }
+    }
 }

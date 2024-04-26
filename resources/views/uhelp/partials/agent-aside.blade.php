@@ -56,6 +56,12 @@
                     <span>Create Category</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('uhelp.showCustomer') }}" class="sidebar-menu-item {{ request()->routeIs('uhelp.showCustomer') ? 'active' : '' }}">
+                    <i class="fa fa-users"></i>
+                    <span>Customers</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

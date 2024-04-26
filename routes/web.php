@@ -38,6 +38,7 @@ Route::prefix('uhelp')->group(function() {
     Route::get('/ticket/create', [TicketController::class, 'create'])->name('uhelp.create');
     Route::post('/ticket/create', [TicketController::class, 'store'])->name('uhelp.store');
     Route::post('/update-ticket/{ticket}', [TicketController::class, 'update'])->name('uhelp.updateTicket');
+    Route::get('ticket/customer/{user?}', [TicketController::class, 'showCustomer'])->name('uhelp.showCustomer');
 
     Route::get('/ticket/category', [CategoryController::class, 'create'])->name('uhelp.createCategory');
     Route::post('/ticket/category', [CategoryController::class, 'store'])->name('uhelp.storeCategory');

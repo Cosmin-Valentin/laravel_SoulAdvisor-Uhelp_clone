@@ -39,7 +39,7 @@
                 <div class="onhold-tickets">
                     <div class="ticket-type-body">
                         <div class="ticket-type-info">
-                            <span>OnHold Tickets</span>
+                            <span>On Hold Tickets</span>
                             <h3 class="text-secondary">{{ $tickets->filterByStatus('onHold')->count() }}</h3>
                         </div>
                         <div class="ticket-type-alt">

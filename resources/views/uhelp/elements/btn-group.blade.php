@@ -1,5 +1,5 @@
 <div class="btn-group">
-    @if ($ticket->status === 'closed' && !request()->routeIs('uhelp.index'))
+    @if ($ticket->status === 'closed' && !request()->routeIs('uhelp.index') && !request()->routeIs('uhelp.showCustomer'))
         <form id="reOpen" method="post" action="{{ route('uhelp.updateTicket', $ticket->id) }}">
             @csrf
             <input type="hidden" name="status" value="reOpened">

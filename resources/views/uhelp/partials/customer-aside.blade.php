@@ -24,6 +24,18 @@
                         <span>Create Ticket</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('uhelp.index', 'active') }}" class="side-menu-item {{ ($status ?? null) === 'active' ? 'active' : ''}}">
+                        <i class="fa fa-bell-o"></i>
+                        <span>Active Ticket</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('uhelp.index', 'closed') }}" class="side-menu-item {{ ($status ?? null) === 'closed' ? 'active' : ''}}">
+                        <i class="fa fa-bell-slash-o"></i>
+                        <span>Closed Ticket</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
